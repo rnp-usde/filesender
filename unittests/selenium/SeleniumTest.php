@@ -91,9 +91,9 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
         echo "running test suite locally\n";
             return array(
                 // run Chrome on Linux locally
-                array(          
+                array(
                     'browserName' => 'chrome',
-                    'local' => true,        
+                    'local' => true,
                     'desiredCapabilities' =>         array(
                         'platform' => 'Linux',
                         'version' => '84'
@@ -104,14 +104,14 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
 
         return parent::browsers();
     }
-    
+
     public function __construct($name = NULL, array $data = array(), $dataName = '')
     {
         require_once('includes/init.php');
 
 
 
-	
+
         if(getenv('SAUCE_USERNAME') === false)
         {
 		echo "sauce username is not in env";
@@ -143,12 +143,12 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
         $sauce_host = 'saucelabs.com';
         if(getenv('SAUCE_HOST')){
             $sauce_host = getenv('SAUCE_HOST');
-        }        
+        }
         if(!defined('SAUCE_HOST')) {
             define('SAUCE_HOST', $sauce_host);
         }
 
-        
+
         $this->start_url = Config::get('site_url');
 
         if($this->start_url_path != '') {
@@ -162,7 +162,7 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
 
 
         parent::__construct($name, $data, $dataName);
-        
+
     }
 
     public function setUpPage()
@@ -183,7 +183,7 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
     protected function getKeyBindings()
     {
         $key_bindings = array();
-        
+
         $refl = new ReflectionClass('PHPUnit_Extensions_Selenium2TestCase_Keys');
         foreach ($refl->getConstants() as $constant_key=>$constant_value)
         {
@@ -272,7 +272,7 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
         }
 
         sleep(1);
-        
+
         $rv = $this->waitUntil(function() use ($test) {
             $v = $test->execute(array('script' => "if(!('filesender' in window)) { return false;} return window.filesender.pageLoaded;",
                                       'args' => array()));
@@ -300,7 +300,7 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
         $this->changeConfigValue('encryption_key_version_new_files', $v);
         $this->waitForPageLoaded( true );
     }
-    
+
     static public function changeConfigValue($type, $value) {
         Logger::info("changeConfigValue type $type ");
         TestSuiteSupport::changeConfigValue($type, $value);
@@ -453,7 +453,7 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
             $this->assertEquals( 1, count($elements), "upload page stage ".$stageNumber." continue button not found");
             return false;
         }
-        
+
         $elements = $this->elements($this->using('css selector')->value('.btn.stage'.$stageNumber.'continue.disabled'));
         $r = count($elements);
 
@@ -466,7 +466,7 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
     protected function canUploadPageStage2Continue() {
         return $this->canUploadPageStageXContinue('2');
     }
-    
+
     protected function assertUploadPageStage1Continue() {
         $this->assertEquals( $this->canUploadPageStage1Continue(), 1, "upload page stage1 continue button is disabled when it should not be" );
     }
@@ -474,7 +474,7 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
     protected function assertUploadPageStage2Continue() {
         $this->assertEquals( $this->canUploadPageStage2Continue(), 1, "upload page stage2 continue button is disabled when it should not be" );
     }
-    
+
     protected function uploadPageCountInvalidFiles( $reason ) {
 
         $elements = $this->elements($this->using('css selector')->value('*[class="file"]'));
@@ -486,7 +486,7 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
         $elements = $this->elements($this->using('css selector')->value('*[class="file invalid ' . $reason . '"]'));
         $count = count($elements);
         echo "uploadPageCountInvalidFiles() $reason $count \n";
-        return $count;       
+        return $count;
     }
 
     protected function assertUploadPageNoFilesAreTooBig() {
@@ -507,7 +507,7 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
     }
 
 
-    
+
 
     public function waitForCSS($cssSelector, $allowBlank = true) {
         $test = $this;
@@ -550,14 +550,14 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
 
         return $rv;
     }
-    
-    
+
+
 
 
     public function waitForBootbox() {
         $test = $this;
         $cssSelector = '.bootbox';
-        
+
         $rv = $this->waitUntil(function() use ($test,$cssSelector) {
 
             $e = $test->elements($test->using('css selector')->value($cssSelector));
@@ -575,8 +575,8 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
 
         return $rv;
     }
-    
-    
+
+
     public function waitForStage($stage) {
         $test = $this;
 
@@ -606,7 +606,7 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
             }
             return true;
         },  10 *1000, 500 );
-        
+
     }
 
     /**
@@ -615,7 +615,7 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
      */
     public function stageXContinue($stage) {
         Logger::info("stageXContinue() stage $stage ");
-            
+
         $this->waitForStage($stage);
         $this->byCssSelector('.btn.stage'.$stage.'continue')->click();
         $this->waitForStage($stage+1);
@@ -628,7 +628,7 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
             if( $this->isVisible( $e )) {
                 $e->click();
             }
-        }            
+        }
     }
     public function ensureTransferByEmail() {
         if( $e = $this->byId('galemail')) {
@@ -637,12 +637,12 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
             }
         }
     }
-    
+
 
 
     protected function waitForUploadCompleteDialog( $urlExpected = true ) {
         $test = $this;
-        
+
         $this->waitUntil(function() use ($test){
 
             $e = $test->elements($test->using('css selector')->value('.stage4'));
@@ -653,8 +653,8 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
             if( !$this->isVisible( $e[0] )) {
                 Logger::info( "stage element is not visible right now ");
                 return null;
-            }                
-            
+            }
+
             $elements = $test->elements($test->using('css selector')->value('.btn.mytransferslink'));
             $count = count($elements);
             Logger::info( "count is " . $count );
@@ -671,17 +671,17 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
 
             $this->assertGreaterThan( 20, strlen($url), "bad upload url" );
             $this->assertContains( '&token=', $url, "token not found in download url" );
-            $this->assertRegExp('/token=[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/', $url );        
+            $this->assertRegExp('/token=[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/', $url );
         }
         return $url;
     }
-    
+
     protected function showFileUploader()
     {
         if (!$this->isCheckBoxSelected('[name="get_a_link"]')) {
             $this->clickCheckbox('[name="get_a_link"]');
         }
-        
+
         ${"temp"} = $this->execute(array(  'script' => "var file_upload_container = document.getElementsByClassName('file_selector')[0];file_upload_container.style.display='block';", 'args'   => array() ));
     }
 
@@ -705,7 +705,7 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
         if (file_exists( $filepath )) {
             unlink( $filepath );
         }
-        
+
         sleep(2);
         Logger::info("downloadFile(t) $filename");
         $this->waitForCSS(".download_page");
@@ -733,7 +733,7 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
             }
             return true;
         },  20 *1000, 500 );
-        
+
 
         Logger::info("downloadFile(near end) $originalPath ");
         if( $originalPath ) {
@@ -746,20 +746,20 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
             Logger::info("path $originalPath md5 " . md5_file($originalPath));
             Logger::info("path $filepath     md5 " . md5_file($filepath));
         }
-        
-        
+
+
 /*
          // click download
         $this->byCss(".btn.download")->click();
         sleep(5);
-        
+
         // set password
         $this->byCss(".ui-dialog-content.ui-widget-content .wide")->value("123123");
-        
+
         // click ok
         $this->byCss(".ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset .ui-button")->click();
         $this->waitForAndEnsureCssElementContains(".downloadprogress", 'Download complete');
-  */      
+  */
 
     }
 
@@ -774,8 +774,8 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
             $this->clickCheckbox('[name="'.$name.'"]');
         }
     }
-    
-    
+
+
     protected function ensureOptions( $opts )
     {
         foreach ($opts as $k => $v) {
@@ -813,7 +813,7 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
                 Logger::info( "css selector ".$cssSelector." too few visible elements right now ");
                 return null;
             }
-            
+
             return true;
         },  10 *1000, 500 );
 
@@ -822,7 +822,7 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
 
 
     public function waitForFilesListWithPossibleError($cssSelector,$number_of_files,$error_expected) {
-    
+
         if( $error_expected ) {
             $this->assertEquals( true,
                                  $this->waitForElementCount('.file.invalid'.$cssSelector, 1 ),
@@ -876,11 +876,14 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
         $this->execute(array('script' => "document.querySelector(\"".$selector."\").scrollIntoView(true);",
                              'args' => array()));
     }
-    
+
     public function removeUploadStage1( $name )
     {
         $element = $this->waitForCSS("tr[data-name='".$name."'] .removebutton");
         $element->click();
     }
-    
+
+    public function navigateToPage($pageId) {
+        $this->url($pageId);
+    }
 }
