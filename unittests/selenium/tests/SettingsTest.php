@@ -22,7 +22,7 @@ class SettingsTest extends SeleniumTest {
         $this->assertEquals(
             true,
             $isPageLoaded,
-            'UserPreferences page loaded'
+            'Settings page loaded'
         );
     }
 
