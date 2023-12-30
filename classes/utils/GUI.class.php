@@ -69,7 +69,7 @@ class GUI
             'lib/flag-icons/css/flag-icons.min.css',
             'css/default.css',
             'css/new-ui/styles.css', // Adding the new-ui styles
-            'css/themes/rnp.css', // Adding the new-ui theme styles
+            'css/themes/default.css', // Adding the new-ui theme styles
             'skin/styles.css',
             'css/' . Config::get('site_css')
         ));
