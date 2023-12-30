@@ -2,13 +2,13 @@
 
 /*
  * FileSender www.filesender.org
- * 
+ *
  * Copyright (c) 2009-2012, AARNet, Belnet, HEAnet, SURFnet, UNINETT
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
+ *
  * *	Redistributions of source code must retain the above copyright
  * 	notice, this list of conditions and the following disclaimer.
  * *	Redistributions in binary form must reproduce the above copyright
@@ -17,7 +17,7 @@
  * *	Neither the name of AARNet, Belnet, HEAnet, SURFnet and UNINETT nor the
  * 	names of its contributors may be used to endorse or promote products
  * 	derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -34,7 +34,7 @@ require_once dirname(__FILE__) . '/../common/CommonUnitTestCase.php';
 
 /**
  * Transfer class test
- * 
+ *
  * @backupGlobals disabled
  */
 class TransferTest extends CommonUnitTestCase {
@@ -62,7 +62,7 @@ class TransferTest extends CommonUnitTestCase {
 
     /**
      * Function to create a transfer on database
-     * 
+     *
      * @return Transfer: the transfer created in database
      */
     private function create() {
@@ -80,8 +80,24 @@ class TransferTest extends CommonUnitTestCase {
     }
 
     /**
+     * Function to list a transfer on database
+     *
+     * @return Transfers: the transfers created by user
+     */
+    private function list() {
+        $trsort = TransferQueryOrder::create();
+
+        $transfers = Transfer::fromUserOrdered(Auth::user(),
+            $trsort->getViewName(),
+            $trsort->getOrderByClause(),
+            false, 15, 0)
+
+        return $transfer;
+    }
+
+    /**
      * Function used to test creation of transfer in database
-     * 
+     *
      * @return int: transfer->id if test succeed
      */
     public function testCreate() {
@@ -98,9 +114,9 @@ class TransferTest extends CommonUnitTestCase {
 
     /**
      * Function to test getting transfer from cache
-     * 
+     *
      * @depends testCreate
-     * 
+     *
      * @return int: transfer->id if test succeed
      */
     public function testRead($transferId) {
@@ -116,7 +132,7 @@ class TransferTest extends CommonUnitTestCase {
 
     /**
      * Function to test deletion from database of the transfer
-     * 
+     *
      * @depends testRead
      * @return boolean: true if test succeed
      */
@@ -148,7 +164,7 @@ class TransferTest extends CommonUnitTestCase {
 
     /**
      * Function to test deletion from CRON task
-     * 
+     *
      * @depends testDelete
      * @return boolean: true if test succeed
      */
@@ -177,6 +193,28 @@ class TransferTest extends CommonUnitTestCase {
         $this->assertTrue($isDeleted);
 
         return $isDeleted;
+    }
+
+    /**
+     * Function used to test creation of transfer in database
+     *
+     * @return array: transfers list if test succeed
+     */
+    public function testList() {
+        $transferId = $this->create()->id;
+
+        $this->assertTrue($transferId > 0);
+
+        $transfer = Transfer::fromId($transferId);
+
+        $transfers = $this->list();
+
+        $this->assertNotNull($transfers);
+        $this->assertTrue(!empty($transfers) && count($transfers) > 0);
+
+        $this->displayInfo(get_class(), __FUNCTION__, ' -- Transfers:' . count($transfers));
+
+        return $transfers;
     }
 
 }
