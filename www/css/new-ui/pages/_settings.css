@@ -78,6 +78,22 @@
     margin-top: var(--fs-spacing-3x);
 }
 
+.fs-settings__account-actions button {
+    min-width: var(--fs-spacing-16x);
+}
+
+.fs-settings__saved-info button {
+    min-width: var(--fs-spacing-30x);
+}
+
+.fs-settings__logs button {
+    min-width: var(--fs-spacing-22x);
+}
+
+.fs-settings__general button {
+    min-width: var(--fs-spacing-30x);
+}
+
 /* XS */
 @media (max-width: 575px) {
 
@@ -86,8 +102,6 @@
         background: var(--fs-light);
     }
 }
-
-
 
 /* XS,SM,MD */
 @media (max-width: 991px) {
