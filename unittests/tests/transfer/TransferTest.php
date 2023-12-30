@@ -92,7 +92,7 @@ class TransferTest extends CommonUnitTestCase {
             $trsort->getOrderByClause(),
             false, 15, 0)
 
-        return $transfer;
+        return $transfers;
     }
 
     /**
