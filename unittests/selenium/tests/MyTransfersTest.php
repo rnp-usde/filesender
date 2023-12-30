@@ -20,8 +20,9 @@ class MyTransfersTest extends SeleniumTest {
         $isPageLoaded = !empty($pageBlock) && count($pageBlock) > 0;
 
         $this->assertEquals(
+            true,
             $isPageLoaded,
-            $isPageLoaded ? 'UserPreferences page loaded' : 'UserPreferences page not loaded'
+            'My Transfers page loaded'
         );
     }
 
