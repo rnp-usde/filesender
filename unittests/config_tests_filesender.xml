@@ -68,6 +68,7 @@
           <file>./selenium/tests/HeaderMenuTest.php</file>
           <file>./selenium/tests/LanguageSelectTest.php</file>
 
+          <file>./selenium/tests/MyTransfersTest.php</file>
           <file>./selenium/tests/SettingsTest.php</file>
 
         </testsuite>
