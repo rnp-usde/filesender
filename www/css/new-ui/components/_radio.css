@@ -45,7 +45,9 @@
 
 .fs-radio__circle {
   height: 22px;
+  min-height: 22px;
   width: 22px;
+  min-width: 22px;
   background: transparent;
   border: 1px solid var(--fs-accent);
   display: inline-block;
