@@ -78,6 +78,19 @@
     margin-top: var(--fs-spacing-3x);
 }
 
+.fs-settings__actions .fs-list li:first-child {
+    flex: 1;
+}
+
+.fs-settings__saved-info .fs-button,
+.fs-settings__general .fs-button {
+    min-width: 226px;
+}
+
+.fs-settings__logs .fs-button {
+    min-width: 180px;
+}
+
 /* XS */
 @media (max-width: 575px) {
 
@@ -86,8 +99,6 @@
         background: var(--fs-light);
     }
 }
-
-
 
 /* XS,SM,MD */
 @media (max-width: 991px) {

@@ -6,11 +6,10 @@
   border: 0;
   border-radius: var(--fs-spacing-4x);
   cursor: pointer;
-  height: var(--fs-spacing-6x);
-  padding: 0 var(--fs-spacing-3x);
+  min-height: var(--fs-spacing-6x);
+  padding: 4px var(--fs-spacing-3x);
   text-align: center;
   vertical-align: middle;
-  white-space: nowrap;
   width: auto;
   color: var(--fs-light);
   background: var(--fs-accent);
