@@ -253,6 +253,21 @@
   display: block;
 }
 
+.fs-transfer__transfer-fields .recipient {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fs-transfer__transfer-fields .recipient span {
+  word-break: break-word;
+}
+
+.fs-transfer__transfer-fields .recipient + .recipient {
+  margin-top: 0.75em;
+}
+
 .fs-transfer__password {
   padding: 0 var(--fs-spacing-base) var(--fs-spacing-2x) var(--fs-spacing-base);
 }
