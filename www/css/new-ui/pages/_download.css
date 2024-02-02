@@ -83,6 +83,11 @@
     margin-bottom: var(--fs-spacing-2x) !important;
 }
 
+.fs-download .fs-transfer__files {
+    border: 1px solid var(--fs-border) !important;
+    border-radius: var(--fs-spacing-base) !important;
+}
+
 .fs-download .fs-transfer__files__thead {
     display: none;
 }
