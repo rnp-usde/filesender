@@ -406,31 +406,43 @@
   .fs-transfer {
     font-size: 0.8rem;
   }
+
   .fs-transfer h1 {
     font-size: 1.6rem;
     margin: var(--fs-spacing-2x);
   }
+
   .fs-transfer__droparea {
     padding: var(--fs-spacing-base);
     margin-top: var(--fs-spacing-2x);
   }
+
+  .fs-transfer__list {
+    margin-bottom: 140px !important;
+  }
+
   .fs-transfer__list h6 {
     padding: var(--fs-spacing-2x) var(--fs-spacing-base) var(--fs-spacing-base) var(--fs-spacing-base) !important;
     font-size: 0.9rem;
   }
+
   .fs-transfer__files {
     padding: 0 var(--fs-spacing-base) 0 var(--fs-spacing-base);
   }
+
   .fs-transfer__actions {
     flex-direction: column-reverse;
   }
+
   .fs-transfer__left {
     margin-top: var(--fs-spacing-2x);
   }
+
   .fs-transfer__left, .fs-transfer__right {
     display: flex;
     flex-direction: column;
   }
+
   .fs-transfer__left button + button, .fs-transfer__right button + button {
     margin-top: var(--fs-spacing-2x);
   }
@@ -442,7 +454,13 @@
   .fs-transfer__list > .fs-transfer__add-buttons {
     flex-direction: column;
     align-items: center;
-    bottom: -56px;
+    bottom: -140px;
+    width: 100%;
+  }
+
+  .fs-transfer__list > .fs-transfer__add-buttons label,
+  .fs-transfer__list > .fs-transfer__add-buttons label .fs-button {
+    width: 100%;
   }
 
   .fs-transfer__list > .fs-transfer__add-buttons label + label {
@@ -463,6 +481,10 @@
   .fs-transfer__droparea {
     padding: var(--fs-spacing-2x);
     margin-top: var(--fs-spacing-3x);
+  }
+
+  .fs-transfer__list {
+    margin-bottom: 140px !important;
   }
 
   .fs-transfer__list h6 {
@@ -498,7 +520,13 @@
   .fs-transfer__list > .fs-transfer__add-buttons {
     flex-direction: column;
     align-items: center;
-    bottom: -56px;
+    bottom: -140px;
+    width: 100%;
+  }
+
+  .fs-transfer__list > .fs-transfer__add-buttons label,
+  .fs-transfer__list > .fs-transfer__add-buttons label .fs-button {
+    width: 100%;
   }
 
   .fs-transfer__list > .fs-transfer__add-buttons label + label {

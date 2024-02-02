@@ -79,11 +79,11 @@
     display: none;
 }
 
-.fs-transfer__list {
+.fs-download .fs-transfer__list {
     margin-bottom: var(--fs-spacing-2x) !important;
 }
 
-.fs-transfer__files__thead {
+.fs-download .fs-transfer__files__thead {
     display: none;
 }
 

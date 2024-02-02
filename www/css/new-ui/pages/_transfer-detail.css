@@ -92,7 +92,7 @@
     display: none;
 }
 
-.fs-transfer__list {
+.fs-transfer-detail .fs-transfer__list {
     margin-bottom: var(--fs-spacing-2x) !important;
 }
 
