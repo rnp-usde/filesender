@@ -109,9 +109,6 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
     {
         require_once('includes/init.php');
 
-
-
-
         if(getenv('SAUCE_USERNAME') === false)
         {
 		echo "sauce username is not in env";
@@ -128,6 +125,7 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
         if (!defined('SAUCE_USERNAME')) {
             define('SAUCE_USERNAME', getenv('SAUCE_USERNAME'));
         }
+
         if (!defined('SAUCE_ACCESS_KEY')) {
             define('SAUCE_ACCESS_KEY', getenv('SAUCE_ACCESS_KEY'));
         }
@@ -140,14 +138,16 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
                 define('SAUCE_VERIFY_CERTS', true);
             }
         }
+
         $sauce_host = 'saucelabs.com';
+
         if(getenv('SAUCE_HOST')){
             $sauce_host = getenv('SAUCE_HOST');
         }
+
         if(!defined('SAUCE_HOST')) {
             define('SAUCE_HOST', $sauce_host);
         }
-
 
         $this->start_url = Config::get('site_url');
 
@@ -160,9 +160,7 @@ class SeleniumTest extends Sauce\Sausage\WebDriverTestCase
             //$this->deleteDirectory('testmails');
         }
 
-
         parent::__construct($name, $data, $dataName);
-
     }
 
     public function setUpPage()
