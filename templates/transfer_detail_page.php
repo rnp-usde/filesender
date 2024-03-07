@@ -150,11 +150,11 @@ $extend = (bool)Config::get('allow_transfer_expiry_date_extension');
 
                                                 <?php if($audit) { ?>
                                                     <span data-action="auditlog" class="fs-button fs-button--small fs-button--transparent fs-button--info fs-button--no-text download" title="{tr:open_file_auditlog}">
-                                                        <i class="fa fa-history"></i>
+                                                        <i class="fa fa-file-text-o"></i>
                                                     </span>
                                                 <?php } ?>
 
-                                                
+
                                             </div>
                                         </td>
                                     </tr>
@@ -294,7 +294,7 @@ $extend = (bool)Config::get('allow_transfer_expiry_date_extension');
 
                     <?php if($audit) { ?>
                         <button type="button" data-action="auditlog" class="fs-button">
-                            <i class="fa fa-history"></i>
+                            <i class="fa fa-file-text-o"></i>
                             <span>{tr:see_transfer_logs}</span>
                         </button>
                     <?php } ?>
@@ -308,9 +308,9 @@ $extend = (bool)Config::get('allow_transfer_expiry_date_extension');
                         <button type="button" data-action="extend" class="fs-button" data-id="<?php echo $transfer->id ?>" data-expiry-extension="<?php echo $transfer->expiry_date_extension ?>" >
                             <i class="fa fa-calendar-plus-o"></i>
                             <span>{tr:extend_expires}</span>
-                        </button>                        
+                        </button>
                     <?php } ?>
-                    
+
                 </div>
             </div>
         </div>
