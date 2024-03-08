@@ -36,7 +36,8 @@ function presentAVName( $v )
 }
 
 $rid = 0;
-if(Utilities::isTrue(Config::get('download_verification_code_enabled'))) {
+$downloadVerificationCodeEnabled = Config::get('download_verification_code_enabled');
+if(Utilities::isTrue($downloadVerificationCodeEnabled)) {
     if(array_key_exists('token', $_REQUEST)) {
         $token = $_REQUEST['token'];
 
@@ -312,100 +313,102 @@ $showdownloadlinks = Utilities::isTrue(Config::get('download_show_download_links
             </div>
         <?php } ?>
 
-<!--        --><?php //if($have_av) { ?>
-<!--            <div class="row">-->
-<!--                <div class="col mt-5">-->
-<!--                    <div class="general2 box" data-transfer-size="--><?php //echo $transfer->size ?><!--">-->
-<!--                        <div class="avdesc">{tr:av_results_description}-->
-<!--                            --><?php //foreach($sortedFiles as $file) { ?>
-<!--                                <div class="avfile" data-avid="--><?php //echo $file->id ?><!--" >-->
-<!--                                    <span class="name avheader--><?php //outputBool($file->av_all_good)?><!-- ">--><?php //echo Utilities::sanitizeOutput($file->path) ?><!--</span>-->
-<!--                                    --><?php //if(!$file->have_avresults) { ?>
-<!--                                        <span class="desc">{tr:no_av_scans_performed}</span>-->
-<!--                                    --><?php //} else { ?>
-<!--                                        <table>-->
-<!--                                            <tr class="avresultheader">-->
-<!--                                                <th>{tr:performed}</th>-->
-<!--                                                <th>{tr:result}</th>-->
-<!--                                                <th>{tr:avname}</th>-->
-<!--                                            </tr>-->
-<!--                                            --><?php //foreach($file->scan_results as $res) { $resultdesc = passErrToDesc($res->passes,$res->error); ?>
-<!--                                                <tr class="avresult">-->
-<!--                                                    <td class="created">--><?php //echo Utilities::sanitizeOutput(Utilities::formatDate($res->created)) ?><!--</td>-->
-<!--                                                    <td class="result avresult--><?php //echo $resultdesc ?><!--">--><?php //echo Lang::tr($resultdesc) ?><!--</td>-->
-<!--                                                    <td class="app_name">--><?php //echo presentAVName($res->name) ?><!--</td>-->
-<!--                                                </tr>-->
-<!--                                            --><?php //} ?>
-<!--                                        </table>-->
-<!--                                    --><?php //} ?>
-<!--        -->
-<!--                                </div>-->
-<!--                            --><?php //} ?>
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        --><?php //} ?>
-<!--        -->
-<!--        <div class="row">-->
-<!--            <div class="col mt-5">-->
-<!--                <div class="verify_email_to_download">-->
-<!--                    <h2>{tr:verify_your_email_address_to_download}</h2>-->
-<!--                    <table columns="2" border="1">-->
-<!--                        <col style="width:25%">-->
-<!--                        <col style="width:75%">-->
-<!--                        <tr>-->
-<!--                            <td>-->
-<!--                                <a href="#" class="verificationcodesendtoemail">-->
-<!--                                    <span class="fa fa-paper-plane fa-lg"></span>&nbsp;{tr:send}-->
-<!--                                </a>-->
-<!--                            </td>-->
-<!--                            <td class="verify_labels2">{tr:send_verification_code_to_your_email_address}</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td colspan="2">-->
-<!--                                <p>{tr:then_enter_verification_code_below}</p>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr class="verificationcodesendpage">-->
-<!--                            <td>-->
-<!--                                <a class="verificationcodesend verificationcodesendelement" href="#">-->
-<!--                                    <span class="fa fa-unlock fa-lg"></span>&nbsp;{tr:verify}-->
-<!--                                </a>-->
-<!--                            </td>-->
-<!--                            <td class="verify_labels2">-->
-<!--                                <input id="verificationcode" class="verificationcode verify_labels verificationcodesendelement" name="verificationcode" type="text"/>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                    </table>-->
-<!--                </div>-->
-<!---->
-<!--                <table class="table borderless general" data-transfer-size="--><?php //echo $transfer->size ?><!--">-->
-<!--                    <tbody>-->
-<!--                    --><?php //if(!array_key_exists('hide_sender_email', $transfer->options) ||
-//                        !$transfer->options['hide_sender_email']) { ?>
-<!--                        <tr><td align="right" class="from">{tr:from}</td><td colspan="5">--><?php //echo Template::sanitizeOutputEmail($transfer->user_email) ?><!--</td></tr>-->
-<!--                    --><?php //} ?>
-<!--                    <tr>-->
-<!--                        <td align="right" class="created">{tr:created}</td><td>--><?php //echo Utilities::sanitizeOutput(Utilities::formatDate($transfer->created)) ?><!--</td>-->
-<!--                        <td align="right" class="expires">{tr:expires}</td><td>--><?php //echo Utilities::sanitizeOutput(Utilities::formatDate($transfer->expires)) ?><!--</td>-->
-<!--                        <td align="right" class="size">{tr:size}</td><td>--><?php //echo Utilities::sanitizeOutput(Utilities::formatBytes($transfer->size)) ?><!--</td>-->
-<!--                    </tr>-->
-<!--                    --><?php //if($transfer->subject) { ?>
-<!--                        <tr><td align="right" class="subject">{tr:subject}</td><td>--><?php //echo Utilities::sanitizeOutput($transfer->subject) ?><!--</td></tr>-->
-<!--                    --><?php //} ?>
-<!---->
-<!--                    --><?php //if($transfer->message) { ?>
-<!--                        <tr><td align="right" class="message">{tr:message}</td><td><p>--><?php //echo Utilities::sanitizeOutput($transfer->message) ?><!--</p></td></tr>-->
-<!--                    --><?php //} ?>
-<!--                    </tbody>-->
-<!--                </table>-->
-<!--                -->
-<!--                <div class="transfer_is_encrypted not_displayed">-->
-<!--                    --><?php //echo $isEncrypted ? 1 : 0;  ?>
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+        <?php if($have_av) { ?>
+            <div class="row">
+                <div class="col mt-5">
+                    <div class="general2 box" data-transfer-size="<?php echo $transfer->size ?>">
+                        <div class="avdesc">{tr:av_results_description}
+                            <?php foreach($sortedFiles as $file) { ?>
+                                <div class="avfile" data-avid="<?php echo $file->id ?>" >
+                                    <span class="name avheader<?php outputBool($file->av_all_good)?> "><?php echo Utilities::sanitizeOutput($file->path) ?></span>
+                                    <?php if(!$file->have_avresults) { ?>
+                                        <span class="desc">{tr:no_av_scans_performed}</span>
+                                    <?php } else { ?>
+                                        <table>
+                                            <tr class="avresultheader">
+                                                <th>{tr:performed}</th>
+                                                <th>{tr:result}</th>
+                                                <th>{tr:avname}</th>
+                                            </tr>
+                                            <?php foreach($file->scan_results as $res) { $resultdesc = passErrToDesc($res->passes,$res->error); ?>
+                                                <tr class="avresult">
+                                                    <td class="created"><?php echo Utilities::sanitizeOutput(Utilities::formatDate($res->created)) ?></td>
+                                                    <td class="result avresult<?php echo $resultdesc ?>"><?php echo Lang::tr($resultdesc) ?></td>
+                                                    <td class="app_name"><?php echo presentAVName($res->name) ?></td>
+                                                </tr>
+                                            <?php } ?>
+                                        </table>
+                                    <?php } ?>
+
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
+        <?php if($downloadVerificationCodeEnabled) { ?>
+            <div class="row">
+                <div class="col mt-5">
+                    <div class="verify_email_to_download">
+                        <h2>{tr:verify_your_email_address_to_download}</h2>
+                        <table columns="2" border="1">
+                            <col style="width:25%">
+                            <col style="width:75%">
+                            <tr>
+                                <td>
+                                    <a href="#" class="verificationcodesendtoemail">
+                                        <span class="fa fa-paper-plane fa-lg"></span>&nbsp;{tr:send}
+                                    </a>
+                                </td>
+                                <td class="verify_labels2">{tr:send_verification_code_to_your_email_address}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <p>{tr:then_enter_verification_code_below}</p>
+                                </td>
+                            </tr>
+                            <tr class="verificationcodesendpage">
+                                <td>
+                                    <a class="verificationcodesend verificationcodesendelement" href="#">
+                                        <span class="fa fa-unlock fa-lg"></span>&nbsp;{tr:verify}
+                                    </a>
+                                </td>
+                                <td class="verify_labels2">
+                                    <input id="verificationcode" class="verificationcode verify_labels verificationcodesendelement" name="verificationcode" type="text"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <table class="table borderless general" data-transfer-size="<?php echo $transfer->size ?>">
+                        <tbody>
+                        <?php if(!array_key_exists('hide_sender_email', $transfer->options) ||
+                            !$transfer->options['hide_sender_email']) { ?>
+                            <tr><td align="right" class="from">{tr:from}</td><td colspan="5"><?php echo Template::sanitizeOutputEmail($transfer->user_email) ?></td></tr>
+                        <?php } ?>
+                        <tr>
+                            <td align="right" class="created">{tr:created}</td><td><?php echo Utilities::sanitizeOutput(Utilities::formatDate($transfer->created)) ?></td>
+                            <td align="right" class="expires">{tr:expires}</td><td><?php echo Utilities::sanitizeOutput(Utilities::formatDate($transfer->expires)) ?></td>
+                            <td align="right" class="size">{tr:size}</td><td><?php echo Utilities::sanitizeOutput(Utilities::formatBytes($transfer->size)) ?></td>
+                        </tr>
+                        <?php if($transfer->subject) { ?>
+                            <tr><td align="right" class="subject">{tr:subject}</td><td><?php echo Utilities::sanitizeOutput($transfer->subject) ?></td></tr>
+                        <?php } ?>
+
+                        <?php if($transfer->message) { ?>
+                            <tr><td align="right" class="message">{tr:message}</td><td><p><?php echo Utilities::sanitizeOutput($transfer->message) ?></p></td></tr>
+                        <?php } ?>
+                        </tbody>
+                    </table>
+
+                    <div class="transfer_is_encrypted not_displayed">
+                        <?php echo $isEncrypted ? 1 : 0;  ?>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
     </div>
 </div>
 
