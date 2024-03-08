@@ -799,3 +799,4 @@ $lang['go_to_invitations'] = 'Ir para todos os meus convites';
 $lang['optional_message'] = 'Mensagem opcional';
 $lang['enter_transfer_name'] = 'Digite o nome da transferência (opcional)';
 $lang['an_initiative_by'] = 'Uma iniciativa por';
+$lang['file_already_added'] = '"{filepath}" já foi adicionado';

@@ -832,3 +832,4 @@ $lang['enter_transfer_name'] = 'Enter the transfer name (optional)';
 $lang['files_transferred_display'] = '{filecount}';
 $lang['size_transferred_display'] = '{size_human_readable}';
 $lang['an_initiative_by'] = 'An initiative by';
+$lang['file_already_added'] = '"{filepath}" already added';
