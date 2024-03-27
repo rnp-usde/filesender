@@ -424,7 +424,7 @@ $expireDays = array_filter(array( 7, 15, 30, 40 ), function($k) {
                                                     </select>
                                                 </div>
                                             <?php } else { ?>
-                                                <div class="fs-input-group fs-input-group--hide" data-transfer-type="transfer-email">
+                                                <div class="fs-input-group fs-input-group--center fs-input-group--no-margin-top fs-input-group--hide" data-transfer-type="transfer-email">
                                                     <label for="from">
                                                         {tr:from}
                                                     </label>
@@ -456,7 +456,7 @@ $expireDays = array_filter(array( 7, 15, 30, 40 ), function($k) {
                                         <?php if($allow_recipients) { ?>
                                             <div data-related-to="message">
                                                 <?php if(Auth::isGuest() && AuthGuest::getGuest()->getOption(GuestOptions::CAN_ONLY_SEND_TO_ME)) { ?>
-                                                    <div class="fs-input-group fs-input-group--hide" data-transfer-type="transfer-email">
+                                                    <div class="fs-input-group fs-input-group--center fs-input-group--hide" data-transfer-type="transfer-email">
                                                         <label for="to">
                                                             {tr:send_transfer_to}
                                                         </label>
@@ -464,7 +464,7 @@ $expireDays = array_filter(array( 7, 15, 30, 40 ), function($k) {
                                                         <?php echo AuthGuest::getGuest()->user_email ?>
                                                     </div>
                                                 <?php } else { ?>
-                                                    <div class="fs-input-group fs-input-group--hide" data-transfer-type="transfer-email">
+                                                    <div class="fs-input-group fs-input-group--center fs-input-group--no-margin-top fs-input-group--hide" data-transfer-type="transfer-email">
                                                         <label for="to">
                                                             {tr:send_transfer_to}
                                                         </label>
@@ -482,7 +482,7 @@ $expireDays = array_filter(array( 7, 15, 30, 40 ), function($k) {
                                             </div>
 
                                             <div data-related-to="message">
-                                                <div class="fs-input-group">
+                                                <div class="fs-input-group fs-input-group--center">
                                                     <label for="subject">
                                                         {tr:subject}
                                                     </label>
@@ -506,7 +506,7 @@ $expireDays = array_filter(array( 7, 15, 30, 40 ), function($k) {
                                                     <label for="message">
                                                         {tr:message}
                                                     </label>
-                                                    <textarea id="message" name="message" rows="3" placeholder="{tr:optional_message}"></textarea>
+                                                    <textarea id="message" name="message" rows="5" placeholder="{tr:optional_message}"></textarea>
                                                 </div>
 
                                                 <label class="invalid" id="message_can_not_contain_urls">{tr:message_can_not_contain_urls}</label>
@@ -544,7 +544,7 @@ $expireDays = array_filter(array( 7, 15, 30, 40 ), function($k) {
                                                     $displayoption($name, $cfg, Auth::isGuest());
                                                 }
                                             }
-                                            
+
                                             ?>
                                         </div>
                                     </div>
@@ -584,11 +584,11 @@ $expireDays = array_filter(array( 7, 15, 30, 40 ), function($k) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="fieldcontainer" id="encryption_password_show_container">  
-                                                    <input id="encryption_show_password" name="encryption_show_password" type="checkbox" checked="1" >  
+                                                <div class="fieldcontainer" id="encryption_password_show_container">
+                                                    <input id="encryption_show_password" name="encryption_show_password" type="checkbox" checked="1" >
                                                     <label class="cursor" for="encryption_show_password">{tr:file_encryption_show_password}</label>
                                                 </div>
-                                                
+
                                                 <div class="fs-transfer__password-bottom">
                                                     <small>{tr:password_share_tip}</small>
                                                 </div>
