@@ -114,6 +114,27 @@ function useWebNotifications()
 }
 
 
+function getOption( n )
+{
+    var ret = (n in filesender.ui.nodes.options) ? filesender.ui.nodes.options[n].is(':checked') : false;
+    return ret;
+}
+
+
+function getGuestOption( n )
+{
+    var auth = $('body').attr('data-auth-type');
+    if(auth == 'guest') {
+        return filesender.ui.guest_options[n];
+    }
+    return false;
+}
+
+
+
+
+
+
 /**
  * apply a 'bad' class to the obj if b==true
  * the useExplicitGoodClass can be set to true and a 'good' css class
@@ -1754,6 +1775,9 @@ $(function() {
     // Stage active class
     filesender.ui.stageActiveClass = 'fs-transfer__step--active';
 
+    // initial value
+    filesender.ui.guest_options = [];
+    
     // Register frequently used nodes
     filesender.ui.nodes = {
         form: form,
@@ -1897,6 +1921,7 @@ $(function() {
         // sending the remains of the files to complete the upload.
         if( filesender.ui.reuploading ) {
             filesender.ui.nodes.stages.confirm.click();
+            filesender.ui.setFileList(2, 4);
             return;
         }
 
@@ -2390,14 +2415,28 @@ $(function() {
 
         if(filesender.ui.transfer.status == 'new' && $(this).filter('[aria-disabled="false"]')) {
 
-            filesender.ui.switchToUloadingPageConfiguration();
-            filesender.ui.startUpload();
-            filesender.ui.nodes.buttons.start.addClass('not_displayed');
-            if(filesender.supports.reader) {
-                filesender.ui.nodes.buttons.pause.removeClass('not_displayed');
-                filesender.ui.nodes.buttons.reconnect_and_continue.removeClass('not_displayed');
+            var auth = $('body').attr('data-auth-type');
+            if(auth == 'guest') {
+
+                // confirm that the upload is only intended to the voucher issuer.
+                if( getOption( 'add_me_to_recipients' )
+                    && !getGuestOption( 'can_only_send_to_me' )
+                    && !filesender.ui.transfer.recipients.length )
+                {
+                    filesender.ui.confirm(lang.tr('confirm_upload_add_to_recipients_with_no_explicit_address'),
+                                          function() { // ok
+                                              startUpload();
+                                          },
+                                          function() { // cancel
+                                          });
+                    
+                    // dailog will start the upload if the user confirms the action
+                    // so we fall through here.
+                    return false;
+                }
             }
-            filesender.ui.nodes.buttons.stop.removeClass('not_displayed');
+
+            startUpload();
         }
         return false;
     }).button();
@@ -2653,6 +2692,10 @@ $(function() {
                 // not be changed for the transfer once it is created.
                 filesender.ui.nodes.stages.nextStep.html( filesender.ui.nodes.stages.confirm.html() );
                 filesender.ui.reuploading = true;
+
+                filesender.ui.goToStage(2);
+
+                window.location.hash = "#uploading";
             };
 
             var forget = function() {
@@ -2676,9 +2719,9 @@ $(function() {
             } else {
 
                 var prompt = filesender.ui.popup( lang.tr('restart_failed_transfer'),
-                    {load:   {callback: load},
-                        forget: {callback: forget, className: 'btn-danger'},
-                        later:  {callback: later}},
+                    {load:   {callback: load, className: 'fs-button fs-button--info'},
+                        forget: {callback: forget, className: 'fs-button fs-button--danger'},
+                        later:  {callback: later, className: 'fs-button fs-button--info'}},
                     {onclose: later});
                 $('<p />').text(lang.tr('failed_transfer_found')).appendTo(prompt);
                 var tctn = $('<div class="failed_transfer" />').appendTo(prompt);

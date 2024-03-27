@@ -78,6 +78,8 @@ if( $testingMode ) {
 
 
 
+
+
 if( $verbose ) {
     echo "cron.php starting up... --force:$force --testing-mode:$testingMode\n";
     echo "cron.php running as user: " . `id` . "\n";
@@ -111,6 +113,9 @@ foreach(Transfer::allExpired() as $transfer) {
 if( $verbose ) echo "cron.php delete failed transfers...\n";
 foreach(Transfer::allFailed() as $transfer) {
     Logger::info($transfer.' failed, deleting it');
+    if( $force ) {
+        $transfer->deleteForce = true;
+    }
     $transfer->delete();
 }
 
@@ -236,6 +241,10 @@ StatLog::clean();
 if( $verbose ) echo "cron.php Clean old auditlog events...\n";
 AuditLog::cleanup();
 
+// Clean old ratelimithistory events
+if( $verbose ) echo "cron.php Clean old ratelimithistory events...\n";
+RateLimitHistory::cleanup();
+
 // Clean up S3 buckets if storage backend is set to CloudS3 and configuration
 // option cloud_s3_use_daily_bucket has been set to true
 if (Utilities::startsWith(strtolower(Config::get('storage_type')), 'clouds3') && Config::get('cloud_s3_use_daily_bucket')) {
@@ -246,6 +255,8 @@ if (Utilities::startsWith(strtolower(Config::get('storage_type')), 'clouds3') &&
 if( Config::get("download_verification_code_enabled")) {
     DownloadOneTimePassword::cleanup();
 }
+
+StorageFilesystem::deleteEmptyBucketDirectories();
 
 // If we are configured to send aggregate (anonymous) statistics
 // to a central server then we should check if it is time to do that.

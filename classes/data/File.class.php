@@ -177,6 +177,7 @@ class File extends DBObject
     protected $iv = '';
     protected $aead = null;
     protected $have_avresults = false;
+    protected $storage_class_name = ''; // set in constructor
    
     /**
      * Related objects cache
@@ -338,8 +339,8 @@ class File extends DBObject
         $file->transfer_id = $transfer->id;
         $file->transferCache = $transfer;
 
-        // Generate uid until it is indeed unique
-        $file->uid = Utilities::generateUID(function ($uid, $tries) {
+        // Generate timestamped uid until it is indeed unique
+        $file->uid = Utilities::generateUID(true, function ($uid, $tries) {
             $statement = DBI::prepare('SELECT * FROM '.File::getDBTable().' WHERE uid = :uid');
             $statement->execute(array(':uid' => $uid));
             $data = $statement->fetch();

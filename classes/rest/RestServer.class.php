@@ -117,6 +117,9 @@ class RestServer
             if (!$type && array_key_exists('HTTP_CONTENT_TYPE', $_SERVER)) {
                 $type = $_SERVER['HTTP_CONTENT_TYPE'];
             }
+            if(!$type) {
+                $type = '';
+            }
             
             // Parse content type
             $type_parts = array_map('trim', explode(';', $type));
@@ -291,9 +294,9 @@ class RestServer
                 $handler->requireSecurityTokenMatch($method, $path) &&
                 !$security_token_matches
             ) {
-                throw new RestException('rest_xsrf_token_did_not_match', 400, 'session token = '.Utilities::getSecurityToken().' and token = '.$security_token);
+                throw new RestInvalidSecurityTokenException('session token = '.Utilities::getSecurityToken().' and token = '.$security_token);
             }
-            
+
             Logger::debug('Forwarding call to '.$class.'::'.$method.'() handler');
             
             $data = call_user_func_array(array($handler, $method), $path);

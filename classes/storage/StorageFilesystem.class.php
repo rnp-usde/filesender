@@ -32,6 +32,7 @@
 if (!defined('FILESENDER_BASE')) {
     die('Missing environment');
 }
+require_once(FILESENDER_BASE.'/lib/vendor/autoload.php');
 
 /**
  *  Gives access to a file on the filesystem
@@ -47,6 +48,7 @@ class StorageFilesystem
      * Folder hashing
      */
     protected static $hashing = null;
+
     
     /**
      * Storage setup, loads options from config
@@ -79,6 +81,7 @@ class StorageFilesystem
         if ($hashing) {
             self::$hashing = $hashing;
         }
+
     }
     
     /**
@@ -283,7 +286,41 @@ class StorageFilesystem
         self::setup();
         return $file->uid;
     }
-  
+
+    // only for test suite to use
+    public static function ensurePath( $path, $subpath )
+    {
+        $p = $path;
+        
+        if ($subpath) { // Ensure that subpath exists and is writable
+            $p = $path;
+            foreach (array_filter(explode('/', $subpath)) as $sub) {
+                $p .= $sub;
+                
+                if (!is_dir($p) && !mkdir($p)) {
+                    throw new StorageFilesystemCannotCreatePathException($p, $file);
+                }
+                
+                if (!is_writable($p)) {
+                    throw new StorageFilesystemCannotWriteException($p, $file);
+                }
+                
+                $p .= '/';
+            }
+        }
+        
+        return $p;
+    }
+
+    protected static function appendToPath( $path, $v )
+    {
+        if (substr($path, -1) != '/') {
+            $path .= '/';
+        }
+        $path .= $v;
+        return $path;
+    }
+    
     /**
      * Build file storage path (without filename)
      *
@@ -291,11 +328,16 @@ class StorageFilesystem
      *
      * @return string path
      */
-    public static function buildPath(File $file)
+    public static function buildPath(File $file, $fullPath = true )
     {
         self::setup();
+
+        if( $fullPath ) {
+            $path = self::$path;
+        } else {
+            $path = "";
+        }
         
-        $path = self::$path;
         
         // Is storage path hashing enabled
         if (self::$hashing) {
@@ -310,28 +352,75 @@ class StorageFilesystem
                 // Call self::$hashing with $file to get sub-path
                 $subpath = trim(trim(self::$hashing($file)), '/');
             }
-            
-            if ($subpath) { // Ensure that subpath exists and is writable
-                $p = $path;
-                foreach (array_filter(explode('/', $subpath)) as $sub) {
-                    $p .= $sub;
-                    
-                    if (!is_dir($p) && !mkdir($p)) {
-                        throw new StorageFilesystemCannotCreatePathException($p, $file);
-                    }
-                    
-                    if (!is_writable($p)) {
-                        throw new StorageFilesystemCannotWriteException($p, $file);
-                    }
-                    
-                    $p .= '/';
-                }
-            }
 
-            // caller is expecting the subpath to be in the return value
-            $path = $p;
+            $path = self::ensurePath( $path, $subpath );
         }
+
+        $perDayBuckets = $file->transfer->storage_filesystem_per_day_buckets;
+        $perHourBuckets = $file->transfer->storage_filesystem_per_hour_buckets;
         
+        if( $perDayBuckets || $perHourBuckets ) {
+            try {
+                $subpath = '';
+
+                $uuid = Ramsey\Uuid\Uuid::fromString($file->uid);
+                if( $uuid->getFields()->getVersion() == 7 ) {
+                    $tt = $uuid->getDateTime()->getTimestamp();
+                    $startOfDay  = $tt - ($tt % (60*60*24));
+                    $startOfHour = $tt - ($tt % (60*60   ));
+                    if( $perDayBuckets ) {
+                        $subpath = "" . $startOfDay;
+                    }
+                    if( $perHourBuckets ) {
+                        if( $subpath != "" ) {
+                            $subpath .= "/";
+                        }
+                        $subpath .= "" . $startOfHour;
+                    }
+
+                    $now = time();
+                    $npath  = $path .  $subpath . "/";
+                    // only make the directories if it is recent enough
+                    if( $tt > $now - (Config::get("storage_filesystem_per_day_max_age_to_create_directory")*24*3600) ) {
+                        $path = StorageFilesystem::ensurePath( $path, $subpath );
+                    } else {
+                        $path = $npath;
+                    }
+                    if (substr($path, -1) != '/') {
+                        $path .= '/';
+                    }
+                } else {
+                    $tt = $file->transfer->created;
+                    $startOfDay  = $tt - ($tt % (60*60*24));
+                    $startOfHour = $tt - ($tt % (60*60   ));
+                    if( $perDayBuckets ) {
+                        $subpath = "" . $startOfDay;
+                    }
+                    if( $perHourBuckets ) {
+                        if( $subpath != "" ) {
+                            $subpath .= "/";
+                        }
+                        $subpath .= "" . $startOfHour;
+                    }
+
+                    $now = time();
+                    $npath  = $path .  $subpath . "/";
+                    // only make the directories if it is recent enough
+                    if( $tt > $now - (Config::get("storage_filesystem_per_day_max_age_to_create_directory")*24*3600) ) {
+                        $path = StorageFilesystem::ensurePath( $path, $subpath );
+                    } else {
+                        $path = $npath;
+                    }
+                    if (substr($path, -1) != '/') {
+                        $path .= '/';
+                    }
+                }
+            } catch (Exception $e) {
+                Logger::error("Issue with per day buckets and UUID");
+                return $path;
+            }
+        }
+  
         return $path;
     }
     
@@ -506,6 +595,86 @@ class StorageFilesystem
             }
         }
     }
+
+    /**
+     * Check if a directory is empty. If the directory does not exist
+     * or can not be opened for reading then false is returned.
+     */
+    public static function is_dir_empty($path)
+    {
+        if( !is_dir($path)) {
+            return false;
+        }
+        
+        if ($handle = opendir($path)) {
+            while (false !== ($entry = readdir($handle))) {
+                if ($entry != "." && $entry != "..") {
+                    closedir($handle);
+                    // directory exists and has content in it
+                    return false;
+                }
+            }
+            closedir($handle);
+            // there was no content in the directory
+            return true;
+        }
+        return false;
+    }
+    
+    protected static function deleteEmptyBucketDirectoriesForDay( $tt, $startOfDay )
+    {
+        $perDayBuckets  = Config::get('storage_filesystem_per_day_buckets');
+        $perHourBuckets = Config::get('storage_filesystem_per_hour_buckets');
+
+        // check if the day directory even exists
+        if( !is_dir(self::$path . $startOfDay)) {
+            return;
+        }
+
+        // check for hourly subdirectories
+        if( $perHourBuckets ) {
+            for( $i=0; $i<24; $i++ ) {
+                $startOfHour = $startOfDay + $i*3600;
+                $p = self::$path . $startOfDay . "/" . $startOfHour;
+                
+                if( self::is_dir_empty($p)) {
+                    Logger::info("deleteEmptyBucketDirectoriesForDay() removing empty hourly directory $p ");
+                    rmdir($p);
+                }
+            }
+        }
+
+        // delete daily directory if it is now empty
+        $p = self::$path . $startOfDay;
+        if( self::is_dir_empty($p)) {
+            Logger::info("deleteEmptyBucketDirectoriesForDay() removing empty daily directory $p ");
+            rmdir($p);
+        }
+    }
+
+    public static function deleteEmptyBucketDirectories()
+    {
+        $perDayBuckets  = Config::get('storage_filesystem_per_day_buckets');
+        $perHourBuckets = Config::get('storage_filesystem_per_hour_buckets');
+
+        if( $perDayBuckets || $perHourBuckets ) {
+            try {
+                $tt = time();
+                $startOfDay  = $tt - ($tt % (60*60*24));
+
+                $daysback = Config::get("storage_filesystem_per_day_min_days_to_clean_empty_directories");
+                $daysbackmax = Config::get("storage_filesystem_per_day_max_days_to_clean_empty_directories");
+                for( ; $daysback < $daysbackmax; $daysback++ ) {
+                    $startOfDay  = ($tt - ($tt % (60*60*24))) - ($daysback *24*3600);
+                    self::deleteEmptyBucketDirectoriesForDay( $tt, $startOfDay );
+                }
+
+            } catch (Exception $e) {
+                Logger::error("Issue with deleting per day buckets");
+            }
+        }        
+    }
+    
     
     /**
      * Tells wether storage support file digests
