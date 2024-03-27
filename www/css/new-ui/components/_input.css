@@ -14,6 +14,10 @@
   display: none;
 }
 
+.fs-input-group--no-margin-top {
+  margin-top: 0;
+}
+
 .fs-input-group label {
   width: var(--fs-spacing-19x);
 }

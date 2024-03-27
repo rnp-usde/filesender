@@ -110,7 +110,7 @@ use ( $new_guests_can_only_send_to_creator,
                             <div class="row">
                                 <div id="send_voucher" class="col-12">
                                     <div>
-                                        <div class="fs-input-group">
+                                        <div class="fs-input-group fs-input-group--center">
                                             <label for="to" class="mandatory">
                                                 {tr:send_invitation_to}
                                             </label>
@@ -125,7 +125,7 @@ use ( $new_guests_can_only_send_to_creator,
                                         <div class="fs-new-invitation__recipients recipients"></div>
                                     </div>
 
-                                    <div class="fs-input-group">
+                                    <div class="fs-input-group fs-input-group--center">
                                         <label for="subject">
                                             {tr:subject}
                                         </label>
@@ -136,7 +136,7 @@ use ( $new_guests_can_only_send_to_creator,
                                         <label for="message">
                                             {tr:message}
                                         </label>
-                                        <textarea id="message" name="message" rows="4" placeholder="{tr:optional_message}"></textarea>
+                                        <textarea id="message" name="message" rows="5" placeholder="{tr:optional_message}"></textarea>
                                     </div>
 
                                     <label class="invalid" id="message_can_not_contain_urls" style="display:none;">{tr:message_can_not_contain_urls}</label>
@@ -153,7 +153,7 @@ use ( $new_guests_can_only_send_to_creator,
                                         }
                                         ?>
                                     </div>
- 
+
                                     <div class="guest_options options_box">
                                     <?php
                                     foreach(Guest::availableOptions() as $name => $cfg) {
