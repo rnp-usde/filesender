@@ -151,7 +151,11 @@ A note about colours;
 * [auth_sp_saml_can_view_statistics_entitlement](#auth_sp_saml_can_view_statistics_entitlement)
 * [auth_sp_saml_can_view_aggregate_statistics_entitlement](#auth_sp_saml_can_view_aggregate_statistics_entitlement)
 * [read_only_mode](#read_only_mode)
-
+* [date_format_style](#date_format_style)
+* [time_format_style](#time_format_style)
+* [make_download_links_clickable](#make_download_links_clickable)
+* [valid_timezone_regex](#valid_timezone_regex)
+* [client_send_current_timezone_to_server](#client_send_current_timezone_to_server)
 
 
 ## Transfers
@@ -1608,6 +1612,49 @@ User language detection is done in the following order:
 * __comment:__ If you are performing a major upgrade you might like to retain an original FileSender installation in read only mode so users can continue to download existing files and redirect visitors to a new site for new uploads. This may be useful for upgrading between major FileSender releases such as the 2.x series to the 3.x series and also for change in infrastructure such as moving to different disk pools or storage back ends.
 
 
+### date_format_style
+* __description:__  High level selection of the style to format a date with.
+* __mandatory:__ no
+* __type:__ string
+* __default:__ medium
+* __available:__ since version 3.0beta7
+* __comment:__ This can be one of full, long, medium, or short. This will be used to format dates and times with the locale according to IntlDateFormatter. The local is taken from the user profile, and then from the http accepted languages sent from the browser so it should match which language and locale the user is most confortable with. See for example https://www.php.net/manual/en/class.intldateformatter.php#intl.intldateformatter-constants This replaces the use of the date_format translation string in the 2.x series of FileSender.
+
+
+### time_format_style
+* __description:__  High level selection of the style to format a date with a time component with.
+* __mandatory:__ no
+* __type:__ string
+* __default:__ medium
+* __available:__ since version 3.0beta7
+* __comment:__ This can be one of full, long, medium, or short. This will be used to format dates and times with the locale according to IntlDateFormatter. The local is taken from the user profile, and then from the http accepted languages sent from the browser so it should match which language and locale the user is most confortable with. See for example https://www.php.net/manual/en/class.intldateformatter.php#intl.intldateformatter-constants This replaces the use of the datetime_format translation string in the 2.x series of FileSender.
+
+
+### make_download_links_clickable
+* __description:__  Allow the user to click on links to downloads instead of needing to copy and paste them to navigate to the transfer.
+* __mandatory:__ no
+* __type:__ boolean
+* __default:__ false
+* __available:__ since version 3.0beta7
+* __comment:__ The transfer link can be clicked on when get a link is used and an upload is compete.
+
+
+### valid_timezone_regex
+* __description:__  A full php regex expression including the leading and trailing //i type characters to match a valid timezone string sent from the browser
+* __mandatory:__ no
+* __type:__ string (php regex including the leading and trailing //i characters)
+* __default:__ '@^[_/a-z]+$@i'
+* __available:__ since version 3.0beta7
+* __comment:__ This regex is used to match timezone data passed from the browser. If the regex does not match the timezone is considered invalid and ignored. Set this to '' to explicitly disable this feature.
+
+
+### client_send_current_timezone_to_server
+* __description:__  If enabled the client will send the current timezone to the server. This could be a privacy issue so it is off by default.
+* __mandatory:__ no
+* __type:__ boolean
+* __default:__ false
+* __available:__ since version 3.0beta7
+* __comment:__ If enabled the client will share the current timezone setting to the server so it can format dates as the client expects.
 
 
 ---

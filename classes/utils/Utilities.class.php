@@ -37,7 +37,6 @@ if (!defined('FILESENDER_BASE')) {
 
 require_once(FILESENDER_BASE.'/lib/random_compat/lib/random.php');
 require_once(FILESENDER_BASE.'/lib/vendor/autoload.php');
-use function PHP81_BC\strftime;
 
 /**
  * Utility functions holder
@@ -183,17 +182,61 @@ class Utilities
 
         Lang::setlocale_fromUserLang( LC_TIME );
 
-        $lid = $with_time ? 'datetime_format' : 'date_format';
-        $dateFormat = Lang::trWithConfigOverride($lid);
-        if ($dateFormat == '{date_format}') {
-            $dateFormat = '%d %b %Y';
+        $dateFormatStyle = IntlDateFormatter::MEDIUM;
+        $timeFormatStyle = IntlDateFormatter::NONE;
+        if( $with_time ) {
+            $timeFormatStyle = IntlDateFormatter::MEDIUM;
         }
-        if ($dateFormat == '{datetime_format}') {
-            $dateFormat = '%d %b %Y %T';
+        $v = Config::get("date_format_style");
+        switch($v) {
+            case "full":   $dateFormatStyle = IntlDateFormatter::FULL; break;
+            case "long":   $dateFormatStyle = IntlDateFormatter::LONG; break;
+            case "medium": $dateFormatStyle = IntlDateFormatter::MEDIUM; break;
+            case "short":  $dateFormatStyle = IntlDateFormatter::SHORT; break;
+        }
+        if( $with_time ) {
+            $v = Config::get("time_format_style");
+            switch($v) {
+                case "full":   $timeFormatStyle = IntlDateFormatter::FULL; break;
+                case "long":   $timeFormatStyle = IntlDateFormatter::LONG; break;
+                case "medium": $timeFormatStyle = IntlDateFormatter::MEDIUM; break;
+                case "short":  $timeFormatStyle = IntlDateFormatter::SHORT; break;
+            }
         }
 
-        $ts = strftime($dateFormat, (int)$timestamp);
-        return mb_convert_encoding( $ts, 'UTF-8' );
+
+        $timezone = null;
+        $al = Lang::getUserAcceptedLanguages();
+        // use default php.ini value if all else fails
+        $al[] = null; 
+        $dateFormat = null;
+
+        if( !empty($_COOKIE["x-filesender-timezone"])) {
+            $tz = $_COOKIE["x-filesender-timezone"];
+            if( !empty(Config::get("valid_timezone_regex"))
+                && preg_match(Config::get("valid_timezone_regex"), $tz)) {
+                $timezone = $tz;
+            }
+        }
+        
+        foreach ($al as $k => $v) {
+
+            $fmt = new IntlDateFormatter(
+                $v,
+                $dateFormatStyle,
+                $timeFormatStyle,
+                $timezone,
+                IntlDateFormatter::GREGORIAN,
+                $dateFormat
+            );        
+            $ts = datefmt_format( $fmt , (int)$timestamp );
+            if( false !== $ts ) {
+                return mb_convert_encoding( $ts, 'UTF-8' );
+            }
+        }
+
+        Logger::error("formatDate() did not find a locale which should never happen");
+        return "";
     }
     
     /**
