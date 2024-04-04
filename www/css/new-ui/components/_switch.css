@@ -82,7 +82,7 @@
   background-color: var(--fs-gray-100);
 }
 
-.fs-switch input:hover:not([disabled]):not(checked) + label:before {
+.fs-switch input:hover:not([disabled]):not(:checked) + label:before {
   background-color: var(--fs-gray-100);
 }
 
