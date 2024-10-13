@@ -4,7 +4,7 @@
     flex-direction: row;
     align-items: center;
     text-decoration: none;
-    font-size: 0.8rem;
+    font-size: 1.6rem;
     border-radius: var(--fs-spacing-3x);
     color: var(--fs-text-color);
     background: transparent;
@@ -13,17 +13,18 @@
 }
 
 .fs-link:hover {
-    color: var(--fs-accent) !important;
-    background: var(--fs-hover) !important;
+    color: var(--fs-link-hover-color) !important;
+    background: var(--fs-link-hover-background) !important;
 }
 
 .fs-link:hover i {
-    color: var(--fs-accent) !important;
+    color: var(--fs-link-icon-color) !important;
 }
 
 .fs-link i {
-    color: var(--fs-accent);
-    font-size: 1.2rem;
+    color: var(--fs-link-icon-color);
+    font-size: 2.4rem;
+    text-align: center;
 }
 
 .fs-link i + span {

@@ -1,15 +1,15 @@
 .fs-my-transfers {
     flex: 1;
     background: var(--fs-bg-color);
-    padding: var(--fs-spacing-6x) var(--fs-spacing-2x);
+    padding: var(--fs-spacing-8x);
 }
 
 .fs-my-transfers table th a {
     color: var(--fs-text-color);
 }
 
-.fs-my-transfers__title {
-    text-align: center;
+.fs-my-transfers h4 {
+    margin-top: var(--fs-spacing-2x) !important;
 }
 
 .fs-my-transfers__title p {

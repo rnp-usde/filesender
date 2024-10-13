@@ -5,6 +5,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.6rem;
   border: 0;
   border-radius: var(--fs-spacing-4x);
   cursor: pointer;
@@ -14,8 +15,8 @@
   vertical-align: middle;
   white-space: nowrap;
   width: auto;
-  color: var(--fs-light);
-  background: var(--fs-accent);
+  color: var(--fs-button-color);
+  background: var(--fs-button-background);
   white-space: normal;
 }
 
@@ -24,32 +25,32 @@
 }
 
 .fs-button:hover {
-  color: var(--fs-light);
-  background: var(--fs-btn-hover);
+  color: var(--fs-button-color);
+  background: var(--fs-button-hover-background);
 }
 
 .fs-button:active {
-  color: var(--fs-light);
-  background: var(--fs-btn-active);
+  color: var(--fs-button-color);
+  background: var(--fs-button-active-background);
 }
 
 .bootbox-accept:hover {
-  color: var(--fs-light);
-  background: var(--fs-btn-hover);
+  color: var(--fs-button-color);
+  background: var(--fs-button-hover-background);
 }
 
 .bootbox-accept:active {
-  color: var(--fs-light);
-  background: var(--fs-btn-active);
+  color: var(--fs-button-color);
+  background: var(--fs-button-active-background);
 }
 
 .btn-secondary:hover {
-  color: var(--fs-light);
+  color: var(--fs-button-color);
   background: var(--fs-btn-hover);
 }
 
 .btn-secondary:active {
-  color: var(--fs-light);
+  color: var(--fs-button-color);
   background: var(--fs-btn-active);
 }
 
@@ -57,12 +58,13 @@
 .fs-button[disabled] {
   opacity: .3;
   cursor: not-allowed;
-  color: var(--fs-light) !important;
-  background: var(--fs-accent) !important;
+  color: var(--fs-button-color) !important;
+  background: var(--fs-grey) !important;
 }
 
 .fs-button i {
-  margin-right: var(--fs-spacing-base);
+  font-size: 2.4rem;
+  margin-right: calc(var(--fs-spacing-base) + var(--fs-spacing-half));
 }
 
 .fs-button--icon-right i {
@@ -83,7 +85,7 @@
 
 .fs-button--transparent {
   background: transparent !important;
-  color: var(--fs-accent);
+  color: var(--fs-button-color);
 }
 
 .fs-button--transparent.fs-button--danger {

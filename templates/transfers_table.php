@@ -130,9 +130,6 @@ EOF;
 <table class="fs-table fs-table--responsive fs-table--selectable fs-table--striped" data-status="<?php echo $status ?>" data-mode="<?php echo $mode ?>" data-audit="<?php echo $audit ?>">
     <thead>
     <tr>
-        <th>
-            <?php clickableHeader('{tr:transfer_id_short}',TransferQueryOrder::COLUMN_ID,$trsort,$nosort,'{tr:transfer_id}'); ?>
-        </th>
 
         <?php if($show_guest) { ?>
             <th>
@@ -141,11 +138,11 @@ EOF;
         <?php } ?>
 
         <th>
-            <?php clickableHeader('{tr:recipients}',TransferQueryOrder::COLUMN_RECIPIENTS,$trsort,$nosort); ?>
+            Transfer name
         </th>
 
         <th>
-            <?php clickableHeader('{tr:size}',TransferQueryOrder::COLUMN_SIZE,$trsort,$nosort); ?>
+            Date
         </th>
 
         <th>
@@ -154,6 +151,10 @@ EOF;
 
         <th>
             <?php clickableHeader('{tr:downloads}',TransferQueryOrder::COLUMN_DOWNLOAD,$trsort,$nosort); ?>
+        </th>
+
+        <th>
+            <?php clickableHeader('{tr:recipients}',TransferQueryOrder::COLUMN_RECIPIENTS,$trsort,$nosort); ?>
         </th>
 
         <th>
@@ -182,43 +183,18 @@ EOF;
             data-client-entropy="<?php echo $transfer->client_entropy; ?>"
         >
 
-            <td data-label="{tr:transfer_id_short}">
-                <?php
-                echo $transfer->id;
-                if( $transfer->is_encrypted ) {
-                    echo '&nbsp;<span class="fa fa-lock" title="{tr:file_encryption}"></span>';
-                }
-                ?>
-            </td>
-
             <?php if($show_guest) { ?>
                 <td data-label="{tr:guest}">
                     <?php if($transfer->guest) echo '<abbr title="'.Template::replaceTainted($transfer->guest->identity).'">'.Template::replaceTainted($transfer->guest->name).'</abbr>' ?>
                 </td>
             <?php } ?>
 
-            <td data-label="{tr:recipients}">
-                <?php
-                $items = array();
-                foreach(array_slice($transfer->recipients, 0, 3) as $recipient) {
-                    if(in_array($recipient->email, Auth::user()->email_addresses)) {
-                        $items[] = '<abbr title="'.Template::sanitizeOutputEmail($recipient->email).'">'.Lang::tr('me').'</abbr>';
-                    } else if($recipient->email) {
-                        $items[] = '<a href="mailto:'.Template::sanitizeOutputEmail($recipient->email).'">'.Template::replaceTainted($recipient->identity).'</a>';
-                    } else {
-                        $items[] = '<abbr title="'.Lang::tr('anonymous_details').'">'.Lang::tr('anonymous').'</abbr>';
-                    }
-                }
-
-                if(count($transfer->recipients) > 3)
-                    $items[] = '<span class="clickable expand">'.Lang::tr('n_more')->r(array('n' => count($transfer->recipients) - 3)).'</span>';
-
-                echo implode('<br />', $items);
-                ?>
+            <td>
+                <?php echo $transfer->subject ?>
             </td>
 
-            <td data-label="{tr:size}">
-                <?php echo Utilities::formatBytes($transfer->size) ?>
+            <td>
+                <?php echo Utilities::formatDate($transfer->created) ?>
             </td>
 
             <td data-label="{tr:files}">
@@ -251,6 +227,26 @@ EOF;
 
             <td data-label="{tr:expires}">
                 <?php echo Utilities::formatDate($transfer->expires) ?>
+            </td>
+
+            <td data-label="{tr:recipients}">
+                <?php
+                $items = array();
+                foreach(array_slice($transfer->recipients, 0, 3) as $recipient) {
+                    if(in_array($recipient->email, Auth::user()->email_addresses)) {
+                        $items[] = '<abbr title="'.Template::sanitizeOutputEmail($recipient->email).'">'.Lang::tr('me').'</abbr>';
+                    } else if($recipient->email) {
+                        $items[] = '<a href="mailto:'.Template::sanitizeOutputEmail($recipient->email).'">'.Template::replaceTainted($recipient->identity).'</a>';
+                    } else {
+                        $items[] = '<abbr title="'.Lang::tr('anonymous_details').'">'.Lang::tr('anonymous').'</abbr>';
+                    }
+                }
+
+                if(count($transfer->recipients) > 3)
+                    $items[] = '<span class="clickable expand">'.Lang::tr('n_more')->r(array('n' => count($transfer->recipients) - 3)).'</span>';
+
+                echo implode('<br />', $items);
+                ?>
             </td>
 
             

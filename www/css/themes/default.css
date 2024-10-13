@@ -1,8 +1,35 @@
 :root {
     /* COLORS */
 
-    --fs-black: #000000;
+    --fs-black: #333333;
     --fs-white: #FFFFFF;
+
+    --fs-background: #F3F3F3;
+
+    --fs-grey: #DEDEDE;
+    --fs-dark-grey: #666666;
+    --fs-light-grey: #E9E9E9;
+
+    --fs-blue: #0077C8;
+
+    --fs-hover: #0269AF;
+    --fs-pressed: #045C98;
+
+    --fs-success: #037834;
+    --fs-success-bg: #D0F7E0;
+
+    --fs-warning: #CE530E;
+    --fs-warning-bg: #FFE9D0;
+
+    --fs-error: #BF1F16;
+    --fs-error-bg: #FFD9D6;
+
+    --fs-info: #2575AC;
+    --fs-info-bg: #DBF3FF;
+
+    /***********/
+    /* OLD CSS */
+    /***********/
 
     --fs-gray-100: #f0f0f0;
     --fs-gray-200: #E9E9E9;
@@ -14,7 +41,7 @@
     --fs-blue-100: #edf5ff;
     --fs-blue-200: #adcdff;
     --fs-blue-300: #5992ed;
-    --fs-blue: #1351b4;
+    /*--fs-blue: #1351b4;*/
 
     --fs-bg-color: var(--fs-gray-50);
     --fs-bg-color-secondary: var(--fs-white);
@@ -36,21 +63,21 @@
     --fs-light: var(--fs-white);
     --fs-bg-light: var(--fs-bg-color-secondary);
 
-    --fs-hover: #DCE3F2;
+    /*--fs-hover: #DCE3F2;*/
 
     --fs-btn:  var(--fs-blue);
     --fs-btn-hover: #3E6DC1;
     --fs-btn-active: #81A0D6;
 
-    --fs-success: #138821;
+    /*--fs-success: #138821;*/
     --fs-success-hover: #489B49;
     --fs-success-active: #8BBF89;
 
-    --fs-info: #155BCB;
+    /*--fs-info: #155BCB;*/
     --fs-info-hover: #4177D3;
     --fs-info-active: #84A5E4;
 
-    --fs-warning: #FFCD05;
+    /*--fs-warning: #FFCD05;*/
     --fs-warning-hover: #DFB41E;
     --fs-warning-active: #A3882D;
 

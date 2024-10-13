@@ -1,6 +1,54 @@
 :root {
-  --fs-black: #000000;
+  /* COLORS */
+
+  --fs-black: #333333;
   --fs-white: #FFFFFF;
+
+  --fs-grey: #DEDEDE;
+  --fs-dark-grey: #666666;
+  --fs-light-grey: #E9E9E9;
+
+  --fs-blue: #0077C8;
+
+  --fs-hover: #0269AF;
+  --fs-pressed: #045C98;
+
+  --fs-success: #037834;
+  --fs-success-bg: #D0F7E0;
+
+  --fs-warning: #CE530E;
+  --fs-warning-bg: #FFE9D0;
+
+  --fs-error: #BF1F16;
+  --fs-error-bg: #FFD9D6;
+
+  --fs-info: #2575AC;
+  --fs-info-bg: #DBF3FF;
+
+  --fs-background: #F3F3F3;
+  --fs-secondary-background: var(--fs-light-grey);
+
+  --fs-text-color: var(--fs-black);
+
+  --fs-link-background: var(--fs-white);
+
+  --fs-link-hover-color: var(--fs-text-color);
+  --fs-link-hover-background: var(--fs-light-grey);
+
+  --fs-link-active-background: var(--fs-link-background);
+
+  --fs-link-icon-color: var(--fs-black);
+
+  --fs-button-color: var(--fs-white);
+  --fs-button-background: var(--fs-blue);
+
+  --fs-button-hover-background: var(--fs-hover);
+
+  --fs-button-active-background: var(--fs-pressed);
+
+  /***********/
+  /* OLD CSS */
+  /***********/
 
   --fs-gray-50: #F8F9FA;
   --fs-gray-100: #f0f0f0;
@@ -13,30 +61,30 @@
   --fs-blue-100: #edf5ff;
   --fs-blue-200: #adcdff;
   --fs-blue-300: #5992ed;
-  --fs-blue: #1351b4;
+  /*--fs-blue: #1351b4;*/
 
   --fs-primary: var(--fs-blue);
 
   --fs-accent: var(--fs-blue);
-  --fs-hover: #DCE3F2;
+  /*--fs-hover: #DCE3F2;*/
   --fs-accent--fs-active: #9EB0DB;
 
   --fs-bg-color: var(--fs-gray-50);
 
-  --fs-text-color: var(--fs-gray-900);
+  /*--fs-text-color: var(--fs-gray-900);*/
 
   --fs-btn-hover: #3E6DC1;
   --fs-btn-active: #81A0D6;
 
-  --fs-success: #138821;
+  /*--fs-success: #138821;*/
   --fs-success-hover: #489B49;
   --fs-success-active: #8BBF89;
 
-  --fs-info: #155BCB;
+  /*--fs-info: #155BCB;*/
   --fs-info-hover: #4177D3;
   --fs-info-active: #84A5E4;
 
-  --fs-warning: #FFCD05;
+  /*--fs-warning: #FFCD05;*/
   --fs-warning-hover: #DFB41E;
   --fs-warning-active: #A3882D;
 
