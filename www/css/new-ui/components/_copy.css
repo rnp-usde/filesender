@@ -11,13 +11,13 @@
 
 .fs-copy span {
   flex: 1;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   padding: 0 var(--fs-spacing-3x);
   word-break: break-word;
 }
 
 .fs-copy button {
-  font-size: 0.9rem;
+  font-size: 1.2rem;
 }
 
 /* XS,SM */

@@ -29,6 +29,10 @@
     margin-top: var(--fs-spacing-3x);
 }
 
+.fs-my-transfers .actions {
+    text-align: right;
+}
+
 /* XS */
 @media (max-width: 575px) {
 

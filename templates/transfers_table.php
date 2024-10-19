@@ -115,11 +115,12 @@
     $showPager = $havePrev || $haveNext;
 
 if(!function_exists("makeAction")) {
-    function makeAction( $da, $ex, $title, $faicon )
+    function makeAction( $da, $ex, $title, $icon )
     {
         echo <<<EOF
-               <button data-action="$da" type="button" class="fs-button fs-button--circle fs-button--no-text $ex" title="$title">
-                  <i class="fa $faicon" ></i>
+               <button data-action="$da" type="button" class="fs-button $ex" title="$title">
+                  <i class="fi $icon" ></i>
+                  <span>$title</span>
                </button>
 EOF;
     }
@@ -157,10 +158,6 @@ EOF;
             <?php clickableHeader('{tr:recipients}',TransferQueryOrder::COLUMN_RECIPIENTS,$trsort,$nosort); ?>
         </th>
 
-        <th>
-            <?php clickableHeader('{tr:expires}',TransferQueryOrder::COLUMN_EXPIRES,$trsort,$nosort); ?>
-        </th>
-
        <th class="actions">
            {tr:actions}
        </th>
@@ -189,8 +186,14 @@ EOF;
                 </td>
             <?php } ?>
 
-            <td>
-                <?php echo $transfer->subject ?>
+            <td class="fs-table__name">
+                <?php
+                    if (property_exists($transfer, 'name')) {
+                        echo $transfer->name;
+                    } else {
+                        echo Lang::tr('transfer_without_name');
+                    }
+                ?>
             </td>
 
             <td>
@@ -225,10 +228,6 @@ EOF;
                 ?>
             </td>
 
-            <td data-label="{tr:expires}">
-                <?php echo Utilities::formatDate($transfer->expires) ?>
-            </td>
-
             <td data-label="{tr:recipients}">
                 <?php
                 $items = array();
@@ -238,7 +237,7 @@ EOF;
                     } else if($recipient->email) {
                         $items[] = '<a href="mailto:'.Template::sanitizeOutputEmail($recipient->email).'">'.Template::replaceTainted($recipient->identity).'</a>';
                     } else {
-                        $items[] = '<abbr title="'.Lang::tr('anonymous_details').'">'.Lang::tr('anonymous').'</abbr>';
+                        $items[] = Lang::tr('download_link');
                     }
                 }
 
@@ -250,37 +249,14 @@ EOF;
             </td>
 
             
-            <td class="actions  fs-table__actions">
+            <td class="actions fs-table__actions">
                 <?php
-                if( $status != 'available' ) {
-                    echo ' <div id="marg3" class="actionsblock"> ';
-                    makeAction("details", "", "{tr:details}", "fa-info" );
-                    if($audit) { makeAction("auditlog", "", "{tr:open_auditlog}", "fa-history" ); }
-                    echo '</div> ';
-                } else {
+                if( $status == 'available' ) {
+                    makeAction("remind", "", "{tr:send_reminder}", "fi-reminder" );
+                }
+
+                makeAction("delete", "delete", "{tr:delete_transfer}", "fi-trash" );
                 ?>
-                
-                    <div id="marg3" class="actionsblock">
-                        <?php
-                        
-                        makeAction("delete", "fs-button--danger delete", "{tr:delete_transfer}", "fa-trash" );
-                        if($extend) { makeAction("extend", "", "", "fa-calendar-plus-o" ); }  
-                        makeAction("add_recipient", "", "{tr:add_recipient}", "fa-envelope-o" );
-                        makeAction("details", "", "{tr:details}", "fa-info" );
-                        
-                        ?>
-                    </div>
-                    <div id="marg3.2"  class="actionsblock">
-                        <?php
-                        
-                        makeAction("remind", "", "{tr:send_reminder}", "fa-repeat" );
-                        if($audit) { makeAction("auditlog", "", "{tr:open_auditlog}", "fa-history" ); }
-                        if($showAdminExtend) { makeAction("extendexpires", "", "{tr:extend_expires}", "fa-clock-o" ); }
-                        
-                        ?>
-                    </div>
-                    
-                <?php } ?>
             </td>
             
         </tr>
@@ -308,16 +284,16 @@ EOF;
         if( $havePrev ) {
             $prevPage = max(0,$offset-$limit);
             echo "<a class='fs-link fs-link--circle' href='$base&$cgioffset=0&$cgilimit=$limit&transfersort=$transfersort&as=$cgias$cgiuid$cgiminmax'><i class='fa fa-angle-double-left'></i></a>";
-            echo "<a class='fs-link fs-link--circle' href='$base&$cgioffset=$prevPage&$cgilimit=$limit&transfersort=$transfersort&as=$cgias$cgiuid$cgiminmax'><i class='fa fa-angle-left'></i></a>";
+            echo "<a class='fs-link fs-link--circle' href='$base&$cgioffset=$prevPage&$cgilimit=$limit&transfersort=$transfersort&as=$cgias$cgiuid$cgiminmax'><i class='fi fi-chevron-left'></i></a>";
         } else {
             echo "<a class='fs-link fs-link--circle fs-link--disabled' href='javascript:void(0)'><i class='fa fa-angle-double-left'></i></a>";
-            echo "<a class='fs-link fs-link--circle fs-link--disabled' href='javascript:void(0)'><i class='fa fa-angle-left'></i></a>";
+            echo "<a class='fs-link fs-link--circle fs-link--disabled' href='javascript:void(0)'><i class='fi fi-chevron-left'></i></a>";
         }
 
         if( $haveNext ) {
-            echo "<a class='fs-link fs-link--circle' href='$nextLink'><i class='fa fa-angle-right'></i></a>";
+            echo "<a class='fs-link fs-link--circle' href='$nextLink'><i class='fi fi-chevron-right'></i></a>";
         } else {
-            echo "<a class='fs-link fs-link--circle fs-link--disabled' href='javascript:void(0)'><i class='fa fa-angle-right'></i></a>";
+            echo "<a class='fs-link fs-link--circle fs-link--disabled' href='javascript:void(0)'><i class='fi fi-chevron-right'></i></a>";
         }
 
         echo "</div>";

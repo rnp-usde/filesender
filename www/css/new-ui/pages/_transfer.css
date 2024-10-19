@@ -94,8 +94,7 @@
   justify-content: center;
   align-items: center;
   background: var(--fs-bg-light);
-  border: 1px solid var(--fs-border);
-  border-radius: var(--fs-spacing-base);
+  border-radius: var(--fs-spacing-half);
   margin: var(--fs-spacing-4x) 0;
   font-size: 14px;
 }
@@ -134,8 +133,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0 var(--fs-spacing-3x);
-  border-top: 1px solid var(--fs-gray-300);
+  margin: 0 var(--fs-spacing-2x);
+  border-top: 1px solid var(--fs-divider-color);
   min-height: var(--fs-spacing-7x);
 }
 
@@ -182,10 +181,15 @@
   margin-left: var(--fs-spacing-3x);
 }
 
+.fs-transfer__files table td {
+  padding: var(--fs-spacing-2x) 0;
+}
+
 .fs-transfer__files table td,
 .fs-transfer__files table td > div {
   border: none;
   width: 100%;
+  word-break: break-word;
 }
 
 .fs-transfer__files table td div {
@@ -196,8 +200,12 @@
 }
 
 .fs-transfer__files table tr td div span:first-child {
-  flex: 1;
+  flex: 6;
   margin-right: var(--fs-spacing-3x);
+}
+
+.fs-transfer__files table tr td div span.size {
+  flex: 2;
 }
 
 .fs-transfer__files table td div .progressbar {

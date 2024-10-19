@@ -92,7 +92,7 @@ use ( $new_guests_can_only_send_to_creator,
             <div class="col">
                 <div class="fs-new-invitation__header">
                     <a id='fs-back-link' class="fs-link fs-link--circle">
-                        <i class='fa fa-angle-left'></i>
+                        <i class='fi fi-chevron-left'></i>
                     </a>
                     <h1>{tr:new_invitation}</h1>
                 </div>

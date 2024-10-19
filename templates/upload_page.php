@@ -18,7 +18,7 @@ $encryption_mandatory = Principal::isEncryptionMandatory();
 $encryption_checkbox_checked = '';
 $encryption_checkbox_classes = '';
 $expire_time_is_editable = true;
-$upload_directory_button_enabled = false;
+$upload_directory_button_enabled = true;
 
 if( !Config::get('disable_directory_upload')
     && Config::get('directory_upload_button_enabled')
@@ -329,7 +329,7 @@ $expireDays = array_filter(array( 7, 15, 30, 40 ), function($k) {
                         <div class="fs-transfer__actions">
                             <div class="fs-transfer__left">
                                 <button type="button" class="fs-button fs-button--danger fs-transfer__clear-all">
-                                    <i class="fa fa-trash"></i>
+                                    <i class="fi fi-trash"></i>
                                     {tr:clear_all}
                                 </button>
                             </div>

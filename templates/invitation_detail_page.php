@@ -45,7 +45,7 @@ if( !Auth::isAuthenticated() || !$guest || $guest->userid != $user->id ) {
             <div class="col">
                 <div class="fs-invitation-detail__header">
                     <a id='fs-back-link' class="fs-link fs-link--circle">
-                        <i class='fa fa-angle-left'></i>
+                        <i class='fi fi-chevron-left'></i>
                     </a>
                     <h1>{tr:invitation_details}</h1>
                 </div>
@@ -215,7 +215,7 @@ if( !Auth::isAuthenticated() || !$guest || $guest->userid != $user->id ) {
                 <div class="col-12">
                     <div class="fs-invitation-detail__actions">
                         <button type="button" class="fs-button fs-button--danger delete">
-                            <i class="fa fa-trash"></i>
+                            <i class="fi fi-trash"></i>
                             <span>{tr:delete_invitation}</span>
                         </button>
                     </div>

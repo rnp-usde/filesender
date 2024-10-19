@@ -15,8 +15,8 @@
   vertical-align: middle;
   white-space: nowrap;
   width: auto;
-  color: var(--fs-button-color);
-  background: var(--fs-button-background);
+  color: var(--fs-white);
+  background: var(--fs-accent);
   white-space: normal;
 }
 
@@ -25,46 +25,51 @@
 }
 
 .fs-button:hover {
-  color: var(--fs-button-color);
-  background: var(--fs-button-hover-background);
+  color: var(--fs-white);
+  background: var(--fs-hover);
 }
 
 .fs-button:active {
-  color: var(--fs-button-color);
-  background: var(--fs-button-active-background);
+  color: var(--fs-white);
+  background: var(--fs-pressed);
 }
 
 .bootbox-accept:hover {
-  color: var(--fs-button-color);
-  background: var(--fs-button-hover-background);
+  color: var(--fs-white);
+  background: var(--fs-hover);
 }
 
 .bootbox-accept:active {
-  color: var(--fs-button-color);
-  background: var(--fs-button-active-background);
+  color: var(--fs-white);
+  background: var(--fs-pressed);
 }
 
 .btn-secondary:hover {
-  color: var(--fs-button-color);
-  background: var(--fs-btn-hover);
+  color: var(--fs-white);
+  background: var(--fs-hover);
 }
 
 .btn-secondary:active {
-  color: var(--fs-button-color);
-  background: var(--fs-btn-active);
+  color: var(--fs-white);
+  background: var(--fs-pressed);
 }
 
 .fs-button:disabled,
 .fs-button[disabled] {
   opacity: .3;
   cursor: not-allowed;
-  color: var(--fs-button-color) !important;
+  color: var(--fs-white) !important;
   background: var(--fs-grey) !important;
 }
 
 .fs-button i {
   font-size: 2.4rem;
-  margin-right: calc(var(--fs-spacing-base) + var(--fs-spacing-half));
+  margin-right: var(--fs-spacing-base);
+  text-align: center;
+}
+
+.fs-button i.fi {
+  margin-right: var(--fs-spacing-half);
 }
 
 .fs-button--icon-right i {
@@ -85,7 +90,11 @@
 
 .fs-button--transparent {
   background: transparent !important;
-  color: var(--fs-button-color);
+  color: var(--fs-white);
+}
+
+.fs-button--transparent.fs-button--primary {
+  color: var(--fs-accent) !important;
 }
 
 .fs-button--transparent.fs-button--danger {
@@ -190,4 +199,10 @@
 
 a.fs-button {
   text-decoration: none;
+}
+
+.fs-button--inverted {
+  color: var(--fs-accent);
+  background: transparent;
+  border: 2px solid var(--fs-accent);
 }

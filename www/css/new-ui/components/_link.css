@@ -56,11 +56,17 @@
 
 .fs-link--disabled {
     cursor: not-allowed;
-    opacity: 0.4;
+    opacity: 0.7;
     text-decoration: none;
 }
 
-.fs-link--disabled:hover {
+.fs-link--primary,
+.fs-link--primary i,
+.fs-link--primary.fs-link--no-hover:hover,
+.fs-link--primary.fs-link--no-hover:hover i {
     color: var(--fs-accent) !important;
-    background: var(--fs-hightlight-bg) !important;
+}
+
+.fs-link--primary i + span {
+    margin-left: 0;
 }

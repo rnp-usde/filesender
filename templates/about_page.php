@@ -10,7 +10,7 @@
                     <?php
                     if (Auth::isAuthenticated()) {
                         echo "<a id='fs-back-link' class='fs-link fs-link--circle'>
-                                <i class='fa fa-angle-left'></i>
+                                <i class='fi fi-chevron-left'></i>
                             </a>";
                     }
                     ?>

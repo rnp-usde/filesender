@@ -42,7 +42,18 @@
 }
 
 .fs-transfer-detail__check {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     margin-top: var(--fs-spacing-3x);
+}
+
+.fs-transfer-detail__check i {
+    font-size: 2rem;
+}
+
+.fs-transfer-detail__check .fi-valid {
+    color: var(--fs-success);
 }
 
 .fs-transfer-detail__total-size {
@@ -70,9 +81,8 @@
 .fs-transfer-detail__actions {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
     align-items: center;
-    margin-top: var(--fs-spacing-6x) !important;
+    margin-top: var(--fs-spacing-12x) !important;
 }
 
 .fs-transfer-detail__actions--hide {
