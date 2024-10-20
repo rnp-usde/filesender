@@ -1,5 +1,5 @@
 ::selection{
-  background: var(--fs-blue-200);
+  background: var(--fs-accent);
 }
 
 :focus, :focus-visible {

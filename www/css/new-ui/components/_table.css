@@ -10,6 +10,17 @@
   vertical-align: top;
 }
 
+.fs-table th a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: underline;
+}
+
+.fs-table th a i {
+  margin-left: var(--fs-spacing-half);
+}
+
 .fs-table--text-middle th,
 .fs-table--text-middle td {
   vertical-align: middle;

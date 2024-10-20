@@ -1,6 +1,6 @@
 .fs-transfer {
   flex: 1;
-  background: var(--fs-bg-color);
+  background: var(--fs-background);
   padding: var(--fs-spacing-6x) var(--fs-spacing-2x);
 }
 
@@ -93,7 +93,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: var(--fs-bg-light);
+  background: var(--fs-white);
   border-radius: var(--fs-spacing-half);
   margin: var(--fs-spacing-4x) 0;
   font-size: 14px;

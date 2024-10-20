@@ -18,7 +18,7 @@
   white-space: nowrap;
   width: auto;
   color: var(--fs-accent);
-  background: var(--fs-hightlight-bg);
+  background: var(--fs-info-bg);
   margin-right: var(--fs-spacing-base);
   margin-bottom: var(--fs-spacing-2x);
 }

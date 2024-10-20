@@ -36,7 +36,7 @@ footer .fs-footer-container small {
 }
 
 footer .fs-version {
-  background: var(--fs-bg-color);
+  background: var(--fs-background);
   text-align: right;
   font-size: 0.6rem;
   padding: var(--fs-spacing-half) var(--fs-spacing-base);

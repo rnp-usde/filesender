@@ -27,7 +27,7 @@
 
 .fs-switch label:before {
   background: #fff;
-  border: 1px solid var(--fs-bg-color-quarternary);
+  border: 1px solid var(--fs-accent);
   border-radius: 100em;
   content: "";
   height: 34px;
@@ -37,7 +37,7 @@
 }
 
 .fs-switch label:after {
-  background-color: var(--fs-bg-color-quarternary);
+  background-color: var(--fs-grey);
   border-radius: 50%;
   content: "";
   height: 28px;
