@@ -199,7 +199,7 @@ if( !Auth::isAuthenticated() || !$transfer || $transfer->userid != $user->id ) {
                                                 <?php if(!$transfer->is_expired) { ?>
 
                                                     <?php if(isset($transfer->options['encryption']) && $transfer->options['encryption'] === true) { ?>
-                                                        <span class="fs-button fs-button--small fs-button--transparent fs-button--info fs-button--no-text download" title="{tr:download}"
+                                                        <span class="fs-button fs-button--small fs-button--transparent fs-button--primary fs-button--no-text download" title="{tr:download}"
                                                               data-id="<?php echo $file->id ?>"
                                                               data-encrypted="<?php echo isset($transfer->options['encryption'])?$transfer->options['encryption']:'false'; ?>"
                                                               data-mime="<?php echo Template::sanitizeOutput($file->mime_type); ?>"
@@ -313,7 +313,7 @@ if( !Auth::isAuthenticated() || !$transfer || $transfer->userid != $user->id ) {
                         </button>
                     <?php } ?>
 
-                    <button type="button" data-action="delete" class="fs-button fs-button--inverted fs-button--danger">
+                    <button type="button" data-action="delete" class="fs-button fs-button--inverted">
                         <i class="fi fi-trash"></i>
                         <span>{tr:delete_transfer}</span>
                     </button>

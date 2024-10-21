@@ -18,7 +18,17 @@ h4 {
     line-height: 24px !important;
 }
 
-h1, h2, h3, h4 {
+h5 {
+    font-size: 1.8rem !important;
+    line-height: 24px !important;
+}
+
+h6 {
+    font-size: 1.6rem !important;
+    line-height: 24px !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
     font-weight: 700 !important;
 }
 

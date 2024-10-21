@@ -383,6 +383,28 @@
   padding: 0;
 }
 
+.fs-transfer .file.uploading {
+  min-height: 80px;
+}
+
+.fs-transfer .file.uploading .fs-progress-circle {
+  display: flex;
+}
+
+.fs-transfer__file-uploaded {
+  display: none;
+  color: var(--fs-success);
+  font-size: 2.4rem;
+}
+
+.fs-transfer .file.uploading.done .fs-transfer__file-uploaded {
+  display: block;
+}
+
+.fs-transfer .file.uploading.done .fs-progress-circle {
+  display: none;
+}
+
 /* XS */
 @media (max-width: 575px) {
   .fs-transfer {

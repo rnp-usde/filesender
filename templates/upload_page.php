@@ -247,6 +247,12 @@ $expireDays = array_filter(array( 7, 15, 30, 40 ), function($k) {
                                                         <i class="fi fi-close"></i>
                                                     </button>
                                                 </span>
+                                                <span class="fs-progress-circle">
+                                                    <span class="fs-progress-circle__value">0</span>
+                                                </span>
+                                                <span class="fs-transfer__file-uploaded">
+                                                    <i class="fi fi-valid"></i>
+                                                </span>
                                             </div>
                                             <div>
                                                 <span class="error"></span>
@@ -266,13 +272,6 @@ $expireDays = array_filter(array( 7, 15, 30, 40 ), function($k) {
                                                     <?php } ?>
                                                 </span>
                                                 <?php } ?>
-                                            </div>
-                                            <div>
-                                            <span class="progressbar">
-                                                <div class="progress">
-                                                    <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </span>
                                             </div>
                                         </td>
                                     </tr>
@@ -798,7 +797,7 @@ $expireDays = array_filter(array( 7, 15, 30, 40 ), function($k) {
                 </div>
 
                 <div class="fs-transfer__upload-actions">
-                    <a id="detail-link" href=""type="button" class="fs-button fs-button--info" role="button">
+                    <a id="detail-link" href=""type="button" class="fs-button fs-button--primary" role="button">
                         {tr:see_transfer_details}
                     </a>
                     <a href="?s=transfers" class="fs-button fs-button--inverted" role="button">

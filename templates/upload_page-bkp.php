@@ -295,7 +295,7 @@ $expireDays = array_filter(array( 7, 15, 30, 40 ), function($k) {
                                                 <span class="filename"></span>
                                                 <span class="filesize"></span>
                                                 <span class="remove stage1">
-                                                <button type="button" class="fs-button fs-button--small fs-button--transparent fs-button--danger fs-button--no-text removebutton" alt="{tr:click_to_delete_file}">
+                                                <button type="button" class="fs-button fs-button--small fs-button--transparent fs-button--inverted fs-button--no-text removebutton" alt="{tr:click_to_delete_file}">
                                                     <i class="fa fa-close"></i>
                                                 </button>
                                             </span>
@@ -356,13 +356,13 @@ $expireDays = array_filter(array( 7, 15, 30, 40 ), function($k) {
                     <div class="col-12">
                         <div class="fs-transfer__actions">
                             <div class="fs-transfer__left">
-                                <button type="button" class="fs-button fs-button--danger fs-transfer__clear-all">
+                                <button type="button" class="fs-button fs-button--inverted fs-transfer__clear-all">
                                     <i class="fi fi-trash"></i>
                                     {tr:clear_all}
                                 </button>
                             </div>
                             <div class="fs-transfer__right">
-                                <button type="button" id="fs-transfer__next-step" class="fs-button fs-button--info fs-button--icon-right fs-transfer__next">
+                                <button type="button" id="fs-transfer__next-step" class="fs-button fs-button--primary fs-button--icon-right fs-transfer__next">
                                     {tr:next}
                                     <i class="fa fa-arrow-right"></i>
                                 </button>
@@ -420,7 +420,7 @@ $expireDays = array_filter(array( 7, 15, 30, 40 ), function($k) {
                                                 <span class="filename"></span>
                                                 <span class="filesize"></span>
                                                 <span class="remove stage1">
-                                                <button type="button" class="fs-button fs-button--small fs-button--transparent fs-button--danger fs-button--no-text removebutton" alt="{tr:click_to_delete_file}">
+                                                <button type="button" class="fs-button fs-button--small fs-button--transparent fs-button--inverted fs-button--no-text removebutton" alt="{tr:click_to_delete_file}">
                                                     <i class="fa fa-close"></i>
                                                 </button>
                                             </span>
@@ -913,17 +913,17 @@ $expireDays = array_filter(array( 7, 15, 30, 40 ), function($k) {
                     <div class="col-12">
                         <div class="fs-transfer__actions">
                             <div class="fs-transfer__left">
-                                <button type="button" id="fs-transfer__previous-step" class="fs-button fs-button--info">
+                                <button type="button" id="fs-transfer__previous-step" class="fs-button fs-button--primary">
                                     <i class="fa fa-arrow-left"></i>
                                     {tr:previous}
                                 </button>
-                                <button type="button" id="fs-transfer__cancel" class="fs-button fs-button--danger">
+                                <button type="button" id="fs-transfer__cancel" class="fs-button fs-button--inverted">
                                     <i class="fa fa-ban"></i>
                                     {tr:cancel}
                                 </button>
                             </div>
                             <div class="fs-transfer__right">
-                                <button type="button" id="fs-transfer__confirm" class="fs-button fs-button--info fs-button--icon-right">
+                                <button type="button" id="fs-transfer__confirm" class="fs-button fs-button--primary fs-button--icon-right">
                                     {tr:confirm}
                                     <i class="fa fa-arrow-right"></i>
                                 </button>
@@ -994,15 +994,15 @@ $expireDays = array_filter(array( 7, 15, 30, 40 ), function($k) {
                                 </div>
                                 <?php if(Config::get('upload_show_play_pause')) { ?>
                                 <div class="buttons">
-                                    <button type="button" id="fs-transfer__pause" class="fs-button fs-button--info fs-button--icon-right pausebutton">
+                                    <button type="button" id="fs-transfer__pause" class="fs-button fs-button--primary fs-button--icon-right pausebutton">
                                         {tr:pause}
                                         <i class="fa fa-pause"></i>
                                     </button>
-                                    <button type="button" id="fs-transfer__resume" class="fs-button fs-button--info fs-button--icon-right resumebutton" disabled="1">
+                                    <button type="button" id="fs-transfer__resume" class="fs-button fs-button--primary fs-button--icon-right resumebutton" disabled="1">
                                         {tr:resume}
                                         <i class="fa fa-play"></i>
                                     </button>
-                                    <button type="button" id="fs-transfer__stop" class="fs-button fs-button--info fs-button--icon-right stopbutton">
+                                    <button type="button" id="fs-transfer__stop" class="fs-button fs-button--primary fs-button--icon-right stopbutton">
                                         {tr:stop}
                                         <i class="fa fa-stop"></i>
                                     </button>
@@ -1092,11 +1092,11 @@ $expireDays = array_filter(array( 7, 15, 30, 40 ), function($k) {
                 </div>
 
                 <div class="fs-transfer__upload-actions">
-                    <a id="detail-link" href=""type="button" class="fs-button fs-button--info" role="button">
+                    <a id="detail-link" href=""type="button" class="fs-button fs-button--primary" role="button">
                         <i class="fa fa-file-text-o"></i>
                         {tr:transfer_details}
                     </a>
-                    <a href="?s=transfers" class="fs-button fs-button--info" role="button">
+                    <a href="?s=transfers" class="fs-button fs-button--primary" role="button">
                         <i class="fa fa-exchange"></i>
                         {tr:all_my_transfers}
                     </a>

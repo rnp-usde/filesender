@@ -243,7 +243,7 @@ window.filesender.ui = {
                 },
                 cancel: {
                     label: yesno ? lang.tr('No').out() : lang.tr('Cancel').out(),
-                    className: 'fs-button fs-button--danger'
+                    className: 'fs-button fs-button--inverted'
                 }
             },
             callback: function (result) {
@@ -273,7 +273,7 @@ window.filesender.ui = {
                 buttons[lid].className = 'fs-button fs-button--success';
             }
             if( !buttons[lid].className ) {
-                buttons[lid].className = 'fs-button fs-button--danger';
+                buttons[lid].className = 'fs-button fs-button--inverted';
             }
             if( !buttons[lid].callback ) {
                 buttons[lid].callback = function() { };
@@ -401,7 +401,7 @@ window.filesender.ui = {
                 console.log("ok cb");
                 return onaction($(this).find('.actions input[name="action"]:checked').val());
             }},
-            cancel: { callback: oncancel, className: 'fs-button fs-button--danger' }
+            cancel: { callback: oncancel, className: 'fs-button fs-button--inverted' }
         }, {onclose: oncancel});
 
         var list = $('<div class="actions" />').appendTo(d);

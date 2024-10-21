@@ -83,28 +83,23 @@ jQuery.fn.extend({
     }
 });
 
-function setFileProgress( bar, v, complete ) {
+function setFileProgress( progress, v, complete ) {
     var origv = v;
     var upload_progress = Math.floor(1000 * v);
 
     v = Math.floor( 100*v );
 
     if (upload_progress < 1000 || complete === true) {
+        progress[1].style.background = `conic-gradient(var(--fs-success) ${v * 3.6}deg, var(--fs-border-color) 0deg)`;
 
-        bar.removeClass('progress-bar-animated');
-        bar.css('width', v+'%').attr('aria-valuenow', v);
         if( v >= 100 ) {
-            bar.closest('.file').addClass('done');
+            progress.closest('.file').addClass('done');
         }
     }
-    else
-    {
-        // Go stripey for validation
-        bar.addClass('progress-bar-animated');
-    }
 
-    var lv = Math.floor( 1000*origv );
-    bar.text((lv/10).toFixed(1) + '%');
+    const lv = Math.floor(1000 * origv);
+    const progressValue = progress[1].querySelector(".fs-progress-circle__value");
+    progressValue.textContent = Math.trunc(lv/10);
 }
 
 function useWebNotifications()
@@ -641,8 +636,8 @@ filesender.ui.files = {
         if(this.status != 'paused')
             filesender.ui.nodes.stats.average_speed.find('.value').text(filesender.ui.formatSpeed(speed));
 
-        var bar = filesender.ui.nodes.files.list.find('[data-cid="' + file.cid + '"] .progress-bar');
-        setFileProgress( bar, (file.fine_progress ? file.fine_progress : file.uploaded) / file.size, complete );
+        const progress = filesender.ui.nodes.files.list.find('[data-cid="' + file.cid + '"] .fs-progress-circle');
+        setFileProgress( progress, (file.fine_progress ? file.fine_progress : file.uploaded) / file.size, complete );
     },
 
     // Clear the file box
@@ -2827,9 +2822,9 @@ $(function() {
             } else {
 
                 var prompt = filesender.ui.popup( lang.tr('restart_failed_transfer'),
-                    {load:   {callback: load, className: 'fs-button fs-button--info'},
-                        forget: {callback: forget, className: 'fs-button fs-button--danger'},
-                        later:  {callback: later, className: 'fs-button fs-button--info'}},
+                    {load:   {callback: load, className: 'fs-button fs-button--inverted'},
+                        forget: {callback: forget, className: 'fs-button fs-button--inverted'},
+                        later:  {callback: later, className: 'fs-button fs-button--primary'}},
                     {onclose: later});
                 $('<p />').text(lang.tr('failed_transfer_found')).appendTo(prompt);
                 var tctn = $('<div class="failed_transfer" />').appendTo(prompt);
