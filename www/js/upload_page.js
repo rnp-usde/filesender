@@ -1968,56 +1968,6 @@ $(function() {
     // filesender.ui.nodes.stages.nextStep.prop('disabled', true);
     filesender.ui.nodes.stages.confirm.prop('disabled', true);
 
-    // move to stage2
-    // filesender.ui.nodes.stages.nextStep.on('click',function() {
-    //
-    //     // The user can not change options for the transfer when they are
-    //     // sending the remains of the files to complete the upload.
-    //     if( filesender.ui.reuploading ) {
-    //         filesender.ui.nodes.stages.confirm.click();
-    //         filesender.ui.setFileList(2, 4);
-    //         return;
-    //     }
-    //
-    //     filesender.ui.goToStage(3);
-    //
-    //     filesender.ui.setFileList(2, 3);
-    //
-    //     if( form.attr('data-user-has-gal-preference') == '1' ) {
-    //         $('#transfer-link').prop("checked", true);
-    //         filesender.ui.onChangeTransferType("transfer-link");
-    //     }
-    //
-    //     // If there is only one choice then we should already make it
-    //     if($('.get_a_link_top_selector').length==0) {
-    //         $('#transfer-email').prop("checked", true);
-    //         filesender.ui.onChangeTransferType("transfer-email");
-    //     }
-    //
-    //     var get_a_link_checked = filesender.ui.isUserGettingALink();
-    //     filesender.ui.handle_get_a_link_change();
-    //     if( get_a_link_checked ) {
-    //         form.find('.galmodelink').show();
-    //         form.find('.galmodeemail').hide();
-    //     } else {
-    //         form.find('.galmodelink').hide();
-    //         form.find('.galmodeemail').show();
-    //     }
-    //     window.location.hash = "#stage3";
-    //
-    //     return false;
-    // });
-
-    // move to stage1
-    // filesender.ui.nodes.stages.previousStep.on('click',function() {
-    //     window.location.hash = "";
-    //     filesender.ui.goToStage(2);
-    //
-    //     //force graph to redraw
-    //     $("#speedChart").resize();
-    //     return false;
-    // });
-
     // handle browser back and forward buttons as best as we can
     window.onpopstate = function(event) {
         if( filesender.ui.lasthash == "" || filesender.ui.lasthash == "#stage1" ) {
@@ -2796,6 +2746,7 @@ $(function() {
                 // filesender.ui.nodes.stages.nextStep.html( filesender.ui.nodes.stages.confirm.html() );
                 filesender.ui.reuploading = true;
 
+                filesender.ui.hideDragAndDropUpload();
                 filesender.ui.goToStage(1);
 
                 window.location.hash = "#uploading";

@@ -273,7 +273,7 @@
 }
 
 .fs-transfer__upload-detail {
-  margin-top: var(--fs-spacing-9x);
+  margin-top: var(--fs-spacing-4x);
 }
 
 .fs-transfer__upload-detail h5 {
@@ -352,7 +352,7 @@
 }
 
 .fs-transfer__recipients {
-  padding-left: var(--fs-spacing-22x);
+  /*padding-left: var(--fs-spacing-22x);*/
 }
 
 .fs-transfer__recipients .remove {
