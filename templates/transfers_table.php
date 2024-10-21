@@ -134,13 +134,15 @@ EOF;
 
         <?php if($show_guest) { ?>
             <th>
-                {tr:guest}
+                {tr:from}
             </th>
         <?php } ?>
 
-        <th>
-            Transfer name
-        </th>
+        <?php if(!$show_guest) { ?>
+            <th>
+                {tr:transfer_name}
+            </th>
+        <?php } ?>
 
         <th>
             Date
@@ -150,17 +152,21 @@ EOF;
             <?php clickableHeader('{tr:files}',TransferQueryOrder::COLUMN_FILE,$trsort,$nosort); ?>
         </th>
 
-        <th>
-            <?php clickableHeader('{tr:downloads}',TransferQueryOrder::COLUMN_DOWNLOAD,$trsort,$nosort); ?>
-        </th>
+        <?php if(!$show_guest) { ?>
+            <th>
+                <?php clickableHeader('{tr:downloads}',TransferQueryOrder::COLUMN_DOWNLOAD,$trsort,$nosort); ?>
+            </th>
+        <?php } ?>
 
         <th>
             <?php clickableHeader('{tr:recipients}',TransferQueryOrder::COLUMN_RECIPIENTS,$trsort,$nosort); ?>
         </th>
 
-       <th class="actions">
-           {tr:actions}
-       </th>
+        <?php if(!$show_guest) { ?>
+           <th class="actions">
+               {tr:actions}
+           </th>
+        <?php } ?>
     </tr>
     </thead>
     <tbody>
@@ -186,15 +192,17 @@ EOF;
                 </td>
             <?php } ?>
 
-            <td class="fs-table__name">
-                <?php
-                    if (property_exists($transfer, 'name')) {
-                        echo $transfer->name;
-                    } else {
-                        echo Lang::tr('transfer_without_name');
-                    }
-                ?>
-            </td>
+            <?php if(!$show_guest) { ?>
+                <td class="fs-table__name">
+                    <?php
+                        if (property_exists($transfer, 'name')) {
+                            echo $transfer->name;
+                        } else {
+                            echo '-';
+                        }
+                    ?>
+                </td>
+            <?php } ?>
 
             <td>
                 <?php echo Utilities::formatDate($transfer->created) ?>
@@ -221,12 +229,14 @@ EOF;
                 ?>
             </td>
 
-            <td data-label="{tr:downloads}">
-                <?php
-                    $dc = count($transfer->downloads);
-                    echo $dc;
-                ?>
-            </td>
+            <?php if(!$show_guest) { ?>
+                <td data-label="{tr:downloads}">
+                    <?php
+                        $dc = count($transfer->downloads);
+                        echo $dc;
+                    ?>
+                </td>
+            <?php } ?>
 
             <td data-label="{tr:recipients}">
                 <?php
@@ -248,17 +258,17 @@ EOF;
                 ?>
             </td>
 
-            
-            <td class="actions fs-table__actions">
-                <?php
-                if( $status == 'available' ) {
-                    makeAction("remind", "", "{tr:send_reminder}", "fi-reminder" );
-                }
+            <?php if(!$show_guest) { ?>
+                <td class="actions fs-table__actions">
+                    <?php
+                    if( $status == 'available' ) {
+                        makeAction("remind", "", "{tr:send_reminder}", "fi-reminder" );
+                    }
 
-                makeAction("delete", "delete", "{tr:delete_transfer}", "fi-trash" );
-                ?>
-            </td>
-            
+                    makeAction("delete", "delete", "{tr:delete_transfer}", "fi-trash" );
+                    ?>
+                </td>
+            <?php } ?>
         </tr>
     <?php } ?>
 

@@ -1,7 +1,7 @@
 .fs-my-transfers {
     flex: 1;
-    background: var(--fs-bg-color);
-    padding: var(--fs-spacing-8x);
+    background: var(--fs-background);
+    padding: var(--fs-spacing-11x) var(--fs-spacing-2x);
 }
 
 .fs-my-transfers table th a {
@@ -39,6 +39,6 @@
     .fs-my-transfers {
         font-size: 0.8rem;
         flex: 1;
-        background: var(--fs-bg-color);
+        background: var(--fs-background);
     }
 }

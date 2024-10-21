@@ -231,8 +231,8 @@ $showdownloadlinks = Utilities::isTrue(Config::get('download_show_download_links
                                                 <span class="size"><?php echo Utilities::formatBytes($file->size) ?></span>
                                                 <span class="downloadprogress"></span>
                                                 <span class="remove stage1">
-                                                    <a rel="nofollow" href="<?php echo empty($downloadLinks[$file->id]) ? '#' : Utilities::sanitizeOutput($downloadLinks[$file->id]) ?>" class="fs-button fs-button--small fs-button--transparent fs-button--info fs-button--no-text download" title="{tr:download_file}">
-                                                        <i class="fa fa-download"></i>
+                                                    <a rel="nofollow" href="<?php echo empty($downloadLinks[$file->id]) ? '#' : Utilities::sanitizeOutput($downloadLinks[$file->id]) ?>" class="fs-button fs-button--small fs-button--transparent fs-button--primary fs-button--no-text download" title="{tr:download_file}">
+                                                        <i class="fi fi-download"></i>
                                                     </a>
                                                 </span>
                                             </div>

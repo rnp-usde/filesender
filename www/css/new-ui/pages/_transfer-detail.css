@@ -1,7 +1,7 @@
 .fs-transfer-detail {
     flex: 1;
-    background: var(--fs-bg-color);
-    padding: var(--fs-spacing-6x) var(--fs-spacing-2x);
+    background: var(--fs-background);
+    padding: var(--fs-spacing-7x) var(--fs-spacing-2x);
 }
 
 .fs-transfer-detail__header .fs-link {
@@ -160,6 +160,6 @@
     .fs-transfer-detail {
         font-size: 0.8rem;
         flex: 1;
-        background: var(--fs-bg-color);
+        background: var(--fs-background);
     }
 }

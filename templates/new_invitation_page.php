@@ -65,10 +65,11 @@ use ( $new_guests_can_only_send_to_creator,
     $extraDivAttrs = '';
     $hidden = '';
     if($transfer && in_array($name, array(TransferOptions::REDIRECT_URL_ON_COMPLETE))) {
-        echo '<div class="fs-switch" data-option="'.$name.'" '. $extraDivAttrs .'>';
-        echo '<input id="'.$name.'" name="'.$name.'" type="checkbox">';
-        echo '<label for="'.$name.'">'.Lang::tr($name).'</label>';
-        echo '</div>';
+        echo '<label class="fs-switch" data-option="'.$name.'" '. $extraDivAttrs .'>';
+        echo '    <label for="'.$name.'">'.Lang::tr($name).'</label>';
+        echo '    <input id="'.$name.'" name="'.$name.'" type="checkbox">';
+        echo '    <span class="fs-checkbox__mark"></span>';
+        echo '</label>';
     } else {
         $lockClassLabel = '';
         $lockClass = '';
@@ -77,9 +78,9 @@ use ( $new_guests_can_only_send_to_creator,
         }
 
         echo '<label class="fs-checkbox '.$lockClass.'" '. $extraDivAttrs .'>';
-        echo '<label for="'.$name.'">'.Lang::tr($name).'</label>';
-        echo '<input id="'.$name.'" name="'.$name.'" type="checkbox" '.$checked.' />';
-        echo '<span class="fs-checkbox__mark"></span>';
+        echo '    <label for="'.$name.'">'.Lang::tr($name).'</label>';
+        echo '    <input id="'.$name.'" name="'.$name.'" type="checkbox" '.$checked.' />';
+        echo '    <span class="fs-checkbox__mark"></span>';
         echo '</label>';
     }
 };
@@ -220,15 +221,16 @@ use ( $new_guests_can_only_send_to_creator,
                                                         </select>
                                                     </div>
 
-                                                    <div class="fs-select guest_options options_box guest-expires-select-by-picker">
+                                                    <div class="fs-input-group guest_options options_box guest-expires-select-by-picker">
                                                         <label for="expires" id="datepicker_label" class="mandatory">{tr:expiry_date}:</label>
 
-                                                        <input id="expires" name="expires" type="text" autocomplete="off"
-                                                               title="<?php echo Lang::trWithConfigOverride('dp_date_format_hint')->r(array('max' => Config::get('max_guest_days_valid'))) ?>"
-                                                               data-epoch="<?php echo Transfer::getDefaultExpire() ?>"
-                                                        />
+                                                        <div>
+                                                            <input id="expires" name="expires" type="text" autocomplete="off"
+                                                                   title="<?php echo Lang::trWithConfigOverride('dp_date_format_hint')->r(array('max' => Config::get('max_guest_days_valid'))) ?>"
+                                                                   data-epoch="<?php echo Transfer::getDefaultExpire() ?>"
+                                                            />
+                                                        </div>
                                                     </div>
-
 
                                                     <strong>{tr:guest_transfer_settings}</strong>
 
@@ -294,12 +296,6 @@ use ( $new_guests_can_only_send_to_creator,
                         </p>
                         <br />
                         <ul class="fs-list fs-list--inline">
-    <!--                            <li>-->
-    <!--                                <a href="" id="detail-link" class="fs-button">-->
-    <!--                                    <i class="fa fa-envelope-open"></i>-->
-    <!--                                    <span>{tr:see_invitation_details}</span>-->
-    <!--                                </a>-->
-    <!--                            </li>-->
                             <li>
                                 <a href="?s=guests" class="fs-button fs-button--inverted">
                                     <span>{tr:go_to_invitations}</span>

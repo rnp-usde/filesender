@@ -1,7 +1,7 @@
 .fs-invitations {
     flex: 1;
-    background: var(--fs-bg-color);
-    padding: var(--fs-spacing-6x) var(--fs-spacing-2x);
+    background: var(--fs-background);
+    padding: var(--fs-spacing-11x) var(--fs-spacing-2x);
 }
 
 .fs-invitations__header h1 {

@@ -12,6 +12,10 @@
     cursor: pointer;
 }
 
+.fs-link--primary {
+    color: var(--fs-accent);
+}
+
 .fs-link:hover {
     color: var(--fs-link-hover-color) !important;
     background: var(--fs-link-hover-background) !important;
@@ -19,6 +23,23 @@
 
 .fs-link:hover i {
     color: var(--fs-link-icon-color) !important;
+}
+
+.fs-link--no-hover:hover {
+    color: var(--fs-text-color) !important;
+    background: transparent !important;
+}
+
+.fs-link--no-hover.fs-link--primary:hover {
+    color: var(--fs-accent) !important;
+}
+
+.fs-link:focus,
+.fs-link:focus-visible,
+a:focus,
+a-visible {
+    border: 0 !important;
+    outline: none;
 }
 
 .fs-link i {

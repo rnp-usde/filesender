@@ -10,7 +10,7 @@
   border-radius: var(--fs-spacing-4x);
   cursor: pointer;
   height: var(--fs-spacing-6x);
-  padding: 0 var(--fs-spacing-3x);
+  padding: 0 var(--fs-spacing-2x);
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;

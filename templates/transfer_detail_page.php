@@ -164,10 +164,9 @@ if( !Auth::isAuthenticated() || !$transfer || $transfer->userid != $user->id ) {
                         <div class="fs-copy">
                             <span class="download_link"><?php echo $transfer->first_recipient->download_link ?></span>
 
-                            <button id="copy-to-clipboard" type="button" class="fs-button">
-                                <i class="fa fa-copy"></i>
-                                Copy
-                            </button>
+                            <button id="copy-to-clipboard" type='button'>
+                              <i class='fi fi-copy'></i>
+                          </button>
                         </div>
                     </div>
                 <?php } ?>
@@ -217,7 +216,7 @@ if( !Auth::isAuthenticated() || !$transfer || $transfer->userid != $user->id ) {
                                                               data-fileaead="<?php echo $file->aead; ?>"
                                                               data-transferid="<?php echo $transfer->id; ?>"
                                                         >
-                                                            <i class="fa fa-download"></i>
+                                                            <i class="fi fi-download"></i>
                                                         </span>
 
                                                     <?php } else {?>

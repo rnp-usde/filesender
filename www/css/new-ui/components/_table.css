@@ -2,11 +2,15 @@
   margin: 0;
   padding: 0;
   width: 100%;
+  background: var(--fs-light);
+}
+
+.fs-table th {
+  background: var(--fs-background);
 }
 
 .fs-table th,
 .fs-table td {
-  /*padding: var(--fs-spacing-2x);*/
   vertical-align: top;
 }
 
@@ -28,7 +32,7 @@
 
 .fs-table.fs-table--thin th,
 .fs-table.fs-table--thin td {
-  padding: var(--fs-spacing-base);
+  padding: calc(var(--fs-spacing-base) + 2px);
 }
 
 .fs-table.fs-table--striped tbody tr:nth-child(even) {

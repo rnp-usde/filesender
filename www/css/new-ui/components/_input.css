@@ -66,7 +66,7 @@
 
 .fs-input-group input:disabled,
 .fs-input-group textarea:disabled {
-  opacity: 0.5;
+  opacity: 0.7;
 }
 
 .fs-input-group input.invalid,

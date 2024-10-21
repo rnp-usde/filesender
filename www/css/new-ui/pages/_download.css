@@ -1,7 +1,7 @@
 .fs-download {
     flex: 1;
-    background: var(--fs-bg-color);
-    padding: var(--fs-spacing-6x) var(--fs-spacing-2x);
+    background: var(--fs-background);
+    padding: var(--fs-spacing-11x) var(--fs-spacing-2x);
 }
 
 .fs-download__title p {
@@ -74,6 +74,10 @@
 
 .fs-transfer__list {
     margin-bottom: var(--fs-spacing-2x) !important;
+}
+
+.fs-transfer__list--hidden {
+    display: none;
 }
 
 .fs-transfer__files__thead {

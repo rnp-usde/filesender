@@ -11,7 +11,7 @@
 }
 
 .fs-select--small label, .fs-select--small select {
-  font-size: 0.8rem !important;
+  font-size: 1.2rem !important;
 }
 
 .fs-select--small select {
@@ -45,6 +45,6 @@
 }
 
 .fs-select small {
-  padding-left: var(--fs-spacing-3x);
-  font-size: 0.8rem;
+  font-size: 1.2rem;
+  margin-top: var(--fs-spacing-base);
 }

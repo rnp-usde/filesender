@@ -24,7 +24,7 @@
 }
 
 .fs-badge a {
-  font-size: 1rem !important;
+  font-size: 1.6rem !important;
   color: var(--fs-accent) !important;
   text-decoration: none !important;
 }
@@ -68,7 +68,7 @@
 }
 
 .fs-badge-buttons a {
-  font-size: 1rem !important;
+  font-size: 1.6rem !important;
   color: var(--fs-accent) !important;
   text-decoration: none !important;
 }
