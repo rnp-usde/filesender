@@ -1,6 +1,6 @@
 .fs-base-page {
     flex: 1;
-    background: var(--fs-background);
+    background: var(--fs-base-page-background);
     padding: var(--fs-spacing-11x) var(--fs-spacing-2x);
 }
 

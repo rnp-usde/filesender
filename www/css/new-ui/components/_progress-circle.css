@@ -4,7 +4,7 @@
     height: 48px;
     width: 48px;
     border-radius: 50%;
-    background: var(--fs-border-color);
+    background: var(--fs-progress-circle-background);
     align-items: center;
     justify-content: center;
 }
@@ -19,14 +19,14 @@
     height: 40px;
     width: 40px;
     border-radius: 50%;
-    background-color: var(--fs-light);
+    background-color: var(--fs-progress-circle-indicator-background);
 }
 
 .fs-progress-circle__value {
     position: relative;
     font-size: 1.6rem;
     font-weight: bold;
-    color: var(--fs-text-color);
+    color: var(--fs-progress-circle-value-color);
     margin: 0 !important;
     text-align: center;
 }

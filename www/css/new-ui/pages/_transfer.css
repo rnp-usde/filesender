@@ -1,6 +1,6 @@
 .fs-transfer {
   flex: 1;
-  background: var(--fs-background);
+  background: var(--fs-transfer-background);
   padding: var(--fs-spacing-11x) var(--fs-spacing-2x);
 }
 
@@ -35,7 +35,6 @@
   min-height: 35vh;
   padding: var(--fs-spacing-5x);
   margin-top: var(--fs-spacing-4x);
-  background: var(--fs-light);
   border: 1px dashed var(--fs-dark-border-color);
   border-radius: var(--fs-spacing-base);
   font-size: 1.6rem;
@@ -118,7 +117,7 @@
   margin: 0;
   padding: 0;
   overflow: auto;
-  background: var(--fs-white);
+  background: var(--fs-files-background);
   border-radius: var(--fs-spacing-half);
 }
 

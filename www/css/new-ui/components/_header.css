@@ -3,7 +3,7 @@ header {
   height: var(--fs-spacing-12x);
   width: 100%;
   padding: 0 var(--fs-spacing-8x);
-  background: var(--fs-white);
+  background: var(--fs-header-background);
   z-index: 1;
 }
 
@@ -34,7 +34,7 @@ header nav a {
   display: inline-block;
   height: 100%;
   padding: var(--fs-spacing-base) var(--fs-spacing-2x);
-  background: var(--fs-link-background);
+  background: var(--fs-header-link-background);
 }
 
 header nav a h2 {
@@ -53,19 +53,15 @@ header nav img {
   max-height: var(--fs-spacing-8x);
 }
 
-header .fs-link {
-  /*padding: var(--fs-spacing-base) calc(var(--fs-spacing-2x) + var(--fs-spacing-half));*/
-}
-
 header nav .fs-link--active {
-  color: var(--fs-text-color);
-  background: var(--fs-link-active-background);
+  color: var(--fs-header-link-active-color);
+  background: var(--fs-header-link-active-background);
   font-style: italic;
 }
 
 header nav > .fs-link:hover {
-  color: var(--fs-text-color);
-  background: var(--fs-link-hover-background);
+  color: var(--fs-header-hover-color);
+  background: var(--fs-header-hover-background);
 }
 
 header nav > .fs-link {

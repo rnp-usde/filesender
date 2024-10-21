@@ -1,6 +1,6 @@
 .fs-new-invitation {
     flex: 1;
-    background: var(--fs-background);
+    background: var(--fs-new-invitation-background);
     padding: var(--fs-spacing-7x) var(--fs-spacing-2x);
 }
 
@@ -74,7 +74,7 @@
 }
 
 .fs-new-invitation .remove {
-    color: var(--fs-error);
+    color: var(--fs-remove-color);
 }
 
 .guest-expires-select-by-picker {

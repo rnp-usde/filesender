@@ -1,5 +1,5 @@
 .fs-collapse--open {
-  background: var(--fs-light);
+  background: var(--fs-collapse-open-background);
   border-radius: var(--fs-spacing-half);
 }
 
@@ -19,8 +19,8 @@
 }
 
 .fs-collapse__open, .fs-collapse__close {
-  background: var(--fs-light);
-  color: var(--fs-text-color) !important;
+  background: var(--fs-collapse-button-background);
+  color: var(--fs-collapse-button-color) !important;
 }
 
 .fs-collapse .row {
@@ -28,11 +28,11 @@
 }
 
 .fs-collapse__open:hover, .fs-collapse__close:hover {
-  background: var(--fs-alternative-hover);
+  background: var(--fs-collapse-button-hover-background);
 }
 
 .fs-collapse__open:active, .fs-collapse__close:active {
-  background: var(--fs-alternative-pressed);
+  background: var(--fs-collapse-button-active-background);
 }
 
 .fs-collapse__close {

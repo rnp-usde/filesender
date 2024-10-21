@@ -16,7 +16,7 @@
 
 .fs-switch label {
   align-items: center;
-  color: var(--fs-text-color);
+  color: var(--fs-switch-label-color);
   cursor: pointer;
   display: inline-flex;
   margin-bottom: 0;
@@ -26,7 +26,7 @@
 
 .fs-switch label:before {
   background: #fff;
-  border: 1px solid var(--fs-dark-border-color);
+  border: 1px solid var(--fs-switch-border-color);
   border-radius: 100em;
   content: "";
   height: 34px;
@@ -38,7 +38,7 @@
 .fs-switch label:after {
   background-color: var(--fs-light);
   border-radius: 50%;
-  border: 1px solid var(--fs-dark-border-color);
+  border: 1px solid var(--fs-switch-border-color);
   content: "";
   height: 28px;
   position: absolute;
@@ -63,7 +63,7 @@
 }
 
 .fs-switch input:checked + label:before {
-  background: var(--fs-accent);
+  background: var(--fs-switch-checked-background);
 }
 
 .fs-switch input:checked + label:after {
@@ -71,17 +71,17 @@
 }
 
 .fs-switch input:focus-visible + label:before {
-  border-color: #c2860b !important;
-  box-shadow: 0 0 0 2px #c2850c;
+  border-color: var(--fs-switch-focus-border-color);
+  box-shadow: 0 0 0 2px var(--fs-switch-focus-border-color);
   outline: none;
 }
 
 .fs-switch input:hover:not([disabled]):checked + label:before {
-  background-color: var(--fs-hover);
+  background-color: var(--fs-switch-hover-checked-background);
 }
 
 .fs-switch input:hover:not([disabled]):not(checked) + label:before {
-  background-color: var(--fs-alternative-hover);
+  background-color: var(--fs-switch-hover-background);
 }
 
 .fs-switch input:disabled,

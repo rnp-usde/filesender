@@ -1,6 +1,6 @@
 .fs-transfer-detail {
     flex: 1;
-    background: var(--fs-background);
+    background: var(--fs-transfer-detail-background);
     padding: var(--fs-spacing-7x) var(--fs-spacing-2x);
 }
 

@@ -1,6 +1,6 @@
 .fs-settings {
     flex: 1;
-    background: var(--fs-background);
+    background: var(--fs-settings-background);
     padding: var(--fs-spacing-11x) var(--fs-spacing-2x);
     justify-content: flex-start;
 }
@@ -44,7 +44,6 @@
 .fs-settings__account-info {
     display: flex;
     flex-direction: column;
-    background: var(--fs-hightlight-bg);
     border-radius: var(--fs-spacing-4x);
 }
 
@@ -137,7 +136,6 @@
 
     .fs-settings {
         flex: 1;
-        background: var(--fs-light);
     }
 }
 

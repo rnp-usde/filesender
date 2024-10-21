@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  background: var(--fs-info-bg);
+  background: var(--fs-copy-background);
   border-radius: var(--fs-spacing-4x);
   margin-top: var(--fs-spacing-2x);
 }
@@ -23,7 +23,7 @@
   font-size: 2.4rem;
   min-width: auto !important;
   background: transparent !important;
-  color: var(--fs-accent) !important;
+  color: var(--fs-copy-button-color) !important;
   border: 0;
   border-radius: var(--fs-spacing-4x);
   cursor: pointer;

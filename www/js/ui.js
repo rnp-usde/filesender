@@ -103,7 +103,7 @@ window.filesender.ui = {
         for(var lid in buttons) {
             btndef.push({
                 label: lang.tr(lid).out().replace(/<[^>]*>/g, ''),
-                className: buttons[lid].className ? buttons[lid].className : 'fs-button fs-button--success',
+                className: buttons[lid].className ? buttons[lid].className : 'fs-button fs-button--primary',
                 callback: buttons[lid].callback ? buttons[lid].callback : function() {}
             });
         }
@@ -239,7 +239,7 @@ window.filesender.ui = {
             buttons: {
                 confirm: {
                     label: yesno ? lang.tr('Yes').out() : lang.tr('OK').out(),
-                    className: 'fs-button fs-button--success'
+                    className: 'fs-button fs-button--primary'
                 },
                 cancel: {
                     label: yesno ? lang.tr('No').out() : lang.tr('Cancel').out(),
@@ -270,7 +270,7 @@ window.filesender.ui = {
                 buttons[lid].label = lang.tr(lid).out();
             }
             if( buttons[lid].callback && !buttons[lid].className ) {
-                buttons[lid].className = 'fs-button fs-button--success';
+                buttons[lid].className = 'fs-button fs-button--primary';
             }
             if( !buttons[lid].className ) {
                 buttons[lid].className = 'fs-button fs-button--inverted';

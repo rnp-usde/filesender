@@ -2,11 +2,11 @@
   margin: 0;
   padding: 0;
   width: 100%;
-  background: var(--fs-light);
+  background: var(--fs-table-background);
 }
 
 .fs-table th {
-  background: var(--fs-background);
+  background: var(--fs-table-th-background);
 }
 
 .fs-table th,
@@ -36,11 +36,11 @@
 }
 
 .fs-table.fs-table--striped tbody tr:nth-child(even) {
-  background-color: var(--fs-background);
+  background-color: var(--fs-table-striped-even-background);
 }
 
 .fs-table.fs-table--striped tbody tr:nth-child(odd) {
-  background-color: var(--fs-white);
+  background-color: var(--fs-table-striped-odd-background);
 }
 
 .fs-table.fs-table--selectable tbody td:not(.actions) {
@@ -48,7 +48,7 @@
 }
 
 .fs-table.fs-table--selectable tbody tr:hover {
-  background-color: var(--fs-grey) !important;
+  background-color: var(--fs-table-selectable-hover-background) !important;
 }
 
 .fs-table__check-action {
@@ -74,7 +74,7 @@
   /*width: var(--fs-spacing-4x);*/
   padding: 0;
   background: transparent !important;
-  color: var(--fs-accent) !important;
+  color: var(--fs-table-actions-color) !important;
   cursor: pointer !important;
   font-weight: bold;
   margin-right: var(--fs-spacing-2x);
@@ -84,7 +84,7 @@
 .fs-table__actions .fs-button:hover,
 .fs-table__actions .fs-button:active {
   background: transparent !important;
-  color: var(--fs-accent) !important;
+  color: var(--fs-table-button-hover-color) !important;
 }
 
 /* XS,SM,MD */
@@ -101,7 +101,7 @@
     padding: 5px;
     display: block;
     margin: .5rem 0 1rem;
-    background-color: var(--fs-light);
+    background-color: var(--fs-table-responsive-tr-background);
     border-radius: 2px;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
   }
@@ -109,7 +109,7 @@
   .fs-table.fs-table--responsive td {
     display: block;
     text-align: right;
-    border-bottom: 1px dotted var(--fs-gray-300);
+    border-bottom: 1px dotted var(--fs-table-responsive-td-border-color);
   }
 
   .fs-table.fs-table--responsive td:last-child {

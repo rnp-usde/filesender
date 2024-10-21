@@ -1,6 +1,6 @@
 .fs-invitations {
     flex: 1;
-    background: var(--fs-background);
+    background: var(--fs-invitation-background);
     padding: var(--fs-spacing-11x) var(--fs-spacing-2x);
 }
 
@@ -36,7 +36,7 @@
 }
 
 .fs-invitations .fa-exclamation-circle {
-    color: var(--fs-info);
+    color: var(--fs-exclamation-circle-color);
 }
 
 .fs-invitations .actions {

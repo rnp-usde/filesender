@@ -4,7 +4,7 @@
 
 .fs-radio-group input[type="radio"]:checked ~ .fs-radio .fs-radio__option .fs-radio__circle {
   background: transparent;
-  border-color: var(--fs-accent);
+  border-color: var(--fs-radio-group-checked-border-color);
 }
 
 .fs-radio-group input[type="radio"]:checked ~ .fs-radio .fs-radio__option .fs-radio__circle:after {
@@ -22,8 +22,8 @@
 }
 
 .fs-radio:hover .fs-radio__circle {
-  border-color: var(--fs-dark-border-color);
-  background: var(--fs-alternative-hover);
+  border-color: var(--fs-radio-hover-border-colo);
+  background: var(--fs-radio-hover-background);
 }
 
 .fs-radio__option {
@@ -39,8 +39,8 @@
   position: relative;
   height: 22px;
   width: 22px;
-  background: var(--fs-light);
-  border: 1px solid var(--fs-dark-border-color);
+  background: var(--fs-radio-circle-background);
+  border: 1px solid var(--fs-radio-circle-border-color);
   margin-right: 15px;
   border-radius: 50%;
   transition: all 0.25s ease;
@@ -52,7 +52,7 @@
   height: 12px;
   width: 12px;
   border-radius: var(--fs-spacing-2x);
-  background: var(--fs-accent);
+  background: var(--fs-radio-checked-background);
 }
 
 .fs-radio__info {
