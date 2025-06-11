@@ -85,6 +85,7 @@
     --fs-collapse-open-background: var(--fs-light);
     --fs-collapse-button-background: var(--fs-light);
     --fs-collapse-button-color: var(--fs-text-color);
+    --fs-collapse-icon-color: var(--fs-accent);
     --fs-collapse-button-hover-background: var(--fs-alternative-hover);
     --fs-collapse-button-active-background: var(--fs-alternative-pressed);
 
@@ -200,6 +201,7 @@
 
     /* Transfer */
     --fs-transfer-background: var(--fs-base-page-background);
+    --fs-transfer-droparea-background: var(--fs-light);
 
     /* Transfer-detail */
     --fs-transfer-detail-background: var(--fs-base-page-background);

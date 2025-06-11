@@ -283,31 +283,33 @@ if( $pgp_encrypt_passphrase ) {
 
             <div class="fs-transfer__step fs-transfer__step--active" data-step="1">
                 <div class="row">
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-5">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-5 h-100">
                         <div class="fs-transfer__droparea">
-                            <input id="files" class="fs-transfer__input" type="file" name="file" multiple />
+                            <span class="fs-transfer__select-text">
+                                <input id="files" class="fs-transfer__input" type="file" name="file" multiple />
 
-                            <label for="files">
+                                <label for="files">
                                 <span class="fs-link fs-link--primary fs-link--no-hover">
                                     {tr:select_files}
                                 </span>
-                            </label>
+                                </label>
 
-                            <?php if ($upload_directory_button_enabled) { ?>
-                                <div class="fs-transfer__directory">
+                                <?php if ($upload_directory_button_enabled) { ?>
+                                    <div class="fs-transfer__directory">
                                     <span>
                                         &nbsp;{tr:or}&nbsp;
                                     </span>
-                                    <label for="selectdir">
+                                        <label for="selectdir">
                                         <span class="fs-link fs-link--primary fs-link--no-hover">
                                             {tr:or_a_folder}
                                         </span>
-                                    </label>
-                                    <input type="file" name="selectdir" id="selectdir" class="fs-transfer__input" webkitdirectory directory multiple mozdirectory />
-                                </div>
-                            <?php } ?>
+                                        </label>
+                                        <input type="file" name="selectdir" id="selectdir" class="fs-transfer__input" webkitdirectory directory multiple mozdirectory />
+                                    </div>
+                                <?php } ?>
+                            </span>
 
-                            &nbsp;{tr:or_use_drag_and_drop}
+                            <span class="fs-transfer__drop-text">{tr:or_use_drag_and_drop}</span>
                         </div>
 
                         <div class="fs-transfer__list fs-transfer__list--hidden">
@@ -423,49 +425,77 @@ if( $pgp_encrypt_passphrase ) {
 
                             <div class="fs-transfer__transfer-fields <?php if(!$show_get_a_link_or_email_choice) { echo 'fs-transfer__transfer-fields--show'; } ?>">
                                 <div class="row">
-                                    <div class="col-12 col-sm-12 col-md-7 col-lg-8">
+                                    <div class="col-12">
                                         <div class="<?php echo $pgp_encrypt_passphrase_add_class ?>" ></div>
+                                    </div>
+                                </div>
 
-                                        <?php if($allow_recipients) { ?>
+                                <?php if($allow_recipients) { ?>
+
+                                        <?php if(Auth::isGuest() && AuthGuest::getGuest()->getOption(GuestOptions::CAN_ONLY_SEND_TO_ME)) { ?>
                                             <div data-related-to="message"  id="recip">
-                                                <?php if(Auth::isGuest() && AuthGuest::getGuest()->getOption(GuestOptions::CAN_ONLY_SEND_TO_ME)) { ?>
-                                                    <div class="fs-input-group fs-input-group--hide" data-transfer-type="transfer-email">
-                                                        <label for="to">
-                                                            {tr:email_to}
-                                                        </label>
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-12 col-md-7 col-lg-8">
+                                                        <div class="fs-input-group fs-input-group--hide" data-transfer-type="transfer-email">
+                                                            <label for="to">
+                                                                {tr:email_to}
+                                                            </label>
 
-                                                        <?php echo AuthGuest::getGuest()->user_email ?>
-
+                                                            <?php echo AuthGuest::getGuest()->user_email ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
                                                         <?php
-                                                        echo '<div class="recipients">'
+                                                        echo '<div class="fs-transfer__recipients recipients">'
                                                             . Template::sanitizeOutputEmail(AuthGuest::getGuest()->user_email)
                                                             . '</div>';
                                                         ?>
                                                     </div>
-                                                <?php } else { ?>
-                                                    <div class="fs-input-group fs-input-group--hide" data-transfer-type="transfer-email">
-                                                        <label for="to">
-                                                            {tr:email_to}
-                                                        </label>
+                                                </div>
+                                            </div>
+                                        <?php } else { ?>
+                                            <div data-related-to="message"  id="recip">
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-12 col-md-7 col-lg-8">
+                                                        <div class="fs-input-group fs-input-group--hide mb-0" data-transfer-type="transfer-email">
+                                                            <label for="to">
+                                                                {tr:email_to}
+                                                            </label>
 
-                                                        <div>
-                                                            <input name="to" id="to" type="email"
-                                                                   multiple title="{tr:email_separator_msg}"
-                                                                   value=""
-                                                                   placeholder="{tr:enter_to_email}" />
+                                                            <div>
+                                                                <input name="to" id="to" type="email"
+                                                                       multiple title="{tr:email_separator_msg}"
+                                                                       value=""
+                                                                       placeholder="{tr:enter_to_email}" />
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                </div>
 
-                                                    <div class="fs-transfer__recipients recipients"></div>
-                                                <?php } ?>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="fs-transfer__recipients recipients"></div>
+                                                    </div>
+                                                </div>
                                             </div>
+                                        <?php } ?>
 
+
+
+
+
+
+
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-7 col-lg-8">
                                             <div data-related-to="message" class="emailonly">
                                                 <div class="fs-input-group">
                                                     <label for="message">
                                                         {tr:your_message}
                                                     </label>
-                                                    <textarea id="message" name="message" rows="3" placeholder="{tr:optional_message}"></textarea>
+                                                    <textarea id="message" name="message" rows="1" placeholder="{tr:optional_message}"></textarea>
                                                 </div>
 
                                                 <label class="invalid" id="message_can_not_contain_urls">{tr:message_can_not_contain_urls}</label>
@@ -479,22 +509,21 @@ if( $pgp_encrypt_passphrase ) {
                                             <div class="pgpinfo" id="pgpinfo" >
                                                 <p>{tr:pgp_upload_page_description}</p>
                                             </div>
-                                        <?php } ?> <!-- closing if($allow_recipients) -->
-                                        <?php if(Auth::isGuest()) { ?>
-                                            <div>
-                                                <input type="hidden" name="guest_token" value="<?php echo Template::Q(AuthGuest::getGuest()->token) ?>" />
-                                                <input type="hidden" id="guest_options" value="<?php echo Template::Q(json_encode(AuthGuest::getGuest()->options)) ?>" />
-                                                <input type="hidden" id="guest_transfer_options" value="<?php echo Template::Q(json_encode(AuthGuest::getGuest()->transfer_options)) ?>" />
-                                            </div>
-                                        <?php } ?>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-5 col-lg-4 fs-transfer__actions">
+                                            <button type="button" id="fs-transfer__confirm" class="fs-button fs-button--icon-right">
+                                                {tr:transfer_files}
+                                            </button>
+                                        </div>
                                     </div>
-
-                                    <div class="col-12 col-sm-12 col-md-5 col-lg-4 fs-transfer__actions">
-                                        <button type="button" id="fs-transfer__confirm" class="fs-button fs-button--icon-right">
-                                            {tr:transfer_files}
-                                        </button>
+                                <?php } ?> <!-- closing if($allow_recipients) -->
+                                <?php if(Auth::isGuest()) { ?>
+                                    <div>
+                                        <input type="hidden" name="guest_token" value="<?php echo Template::Q(AuthGuest::getGuest()->token) ?>" />
+                                        <input type="hidden" id="guest_options" value="<?php echo Template::Q(json_encode(AuthGuest::getGuest()->options)) ?>" />
+                                        <input type="hidden" id="guest_transfer_options" value="<?php echo Template::Q(json_encode(AuthGuest::getGuest()->transfer_options)) ?>" />
                                     </div>
-                                </div>
+                                <?php } ?>
 
                                 <div class="row">
                                     <div class="col-12 lifted_options">
@@ -528,13 +557,9 @@ if( $pgp_encrypt_passphrase ) {
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="fs-collapse mt-4">
-                                            <button type="button" class="fs-button fs-collapse__open">
+                                            <button type="button" class="fs-button fs-collapse__toggle">
                                                 <span>{tr:settings}</span>
                                                 <i class="fi fi-chevron-down"></i>
-                                            </button>
-                                            <button type="button" class="fs-button fs-collapse__close">
-                                                <span>{tr:settings}</span>
-                                                <i class="fi fi-chevron-up"></i>
                                             </button>
                                             <div class="fs-collapse__content">
                                                 <div class="row">

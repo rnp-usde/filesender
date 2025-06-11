@@ -11,7 +11,7 @@ body {
   background: var(--fs-background);
   color: var(--fs-text-color);
   font-size: 1.6rem;
-  font-family: "Nunito Sans", sans-serif !important;
+  font-family: var(--fs-font-family) !important;
   font-weight: 400;
   font-style: normal;
 }

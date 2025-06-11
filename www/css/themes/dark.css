@@ -61,7 +61,7 @@
     --fs-badge-btn-text-background: var(--fs-info-bg);
 
     /* Buttons */
-    --fs-button-color: var(--fs-dark);
+    --fs-button-color: var(--fs-light);
     --fs-button-background: var(--fs-accent);
     --fs-button-hover-color: var(--fs-dark);
     --fs-button-hover-background: var(--fs-hover);
@@ -85,6 +85,7 @@
     --fs-collapse-open-background: var(--fs-dark);
     --fs-collapse-button-background: var(--fs-dark);
     --fs-collapse-button-color: var(--fs-text-color);
+    --fs-collapse-icon-color: var(--fs-accent);
     --fs-collapse-button-hover-background: var(--fs-alternative-hover);
     --fs-collapse-button-active-background: var(--fs-alternative-pressed);
 
@@ -200,6 +201,7 @@
 
     /* Transfer */
     --fs-transfer-background: var(--fs-base-page-background);
+    --fs-transfer-droparea-background: var(--fs-dark);
 
     /* Transfer-detail */
     --fs-transfer-detail-background: var(--fs-base-page-background);

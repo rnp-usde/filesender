@@ -70,7 +70,7 @@ if( $found ) {
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="fs-invitation-detail__recipients">
-                    <h4>{tr:recipient}</h2>
+                    <h4>{tr:recipient}</h4>
                     <p>
                         {tr:your_invitation_was_sent_to}:
                     </p>
@@ -137,7 +137,7 @@ if( $found ) {
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="fs-invitation-detail__guest-list">
-                    <h4>{tr:invitation_guest_transfer_linked}</h2>
+                    <h4>{tr:invitation_guest_transfer_linked}</h4>
 
                     <?php
                         $transfers = Transfer::fromGuest($guest);
@@ -151,7 +151,7 @@ if( $found ) {
             <div class="row">
                 <div class="col">
                     <div class="fs-invitation-detail__options">
-                        <h4>{tr:invitation_selected_options}</h2>
+                        <h4>{tr:invitation_selected_options}</h4>
                         <div class="row">
                             <?php if ($guest->options) { ?>
                                 <div class="col col-sm-12 col-md-6 mt-3">

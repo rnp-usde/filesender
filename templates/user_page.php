@@ -41,7 +41,7 @@ $user = Auth::user();
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="fs-settings__preferences">
-                    <h4>{tr:user_preferences}</h2>
+                    <h4>{tr:user_preferences}</h4>
                     
                     <div class="fs-switch">
                         <input id="previous-settings" type="checkbox" name="save_transfer_preferences"  <?php echo isChecked($user->save_transfer_preferences); ?> />
@@ -118,7 +118,7 @@ $user = Auth::user();
 
             <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="fs-settings__account-info">
-                    <h4>{tr:account_information}</h2>
+                    <h4>{tr:account_information}</h4>
 
                     <?php
 
@@ -173,7 +173,7 @@ $user = Auth::user();
         <div class="row">
             <div class="col-12">
                 <div class="fs-settings__actions">
-                    <h4>{tr:actions}</h2>
+                    <h4>{tr:actions}</h4>
 
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-6">
@@ -278,7 +278,7 @@ $user = Auth::user();
             <div class="row">
                 <div class="col-12">
                     <div class="fs-settings__remote-authentication">
-                        <h4>{tr:user_remote_authentication}</h2>
+                        <h4>{tr:user_remote_authentication}</h4>
 
                         <?php
                             $tt = 0;
@@ -391,7 +391,7 @@ $user = Auth::user();
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="fs-settings__privacy">
-                    <h4><?php echo Lang::tr('privacy_page'); ?></h2>
+                    <h4><?php echo Lang::tr('privacy_page'); ?></h4>
 
                     <p><?php echo Lang::tr('profile_page_text_linking_to_privacy_page'); ?></p>
                 </div>
@@ -401,7 +401,7 @@ $user = Auth::user();
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                 <div class="fs-settings__about">
-                    <h4>{tr:about_title}</h2>
+                    <h4>{tr:about_title}</h4>
 
                     <p>
                         {tr:agree_text}

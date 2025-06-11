@@ -909,9 +909,9 @@ filesender.ui.recipients = {
 
         if(filesender.ui.nodes.recipients.list.find('.recipient[email="' + email + '"]').length) return ''; // Ignore duplicates
 
-        var node = $('<div class="recipient" />').attr('email', email).appendTo(filesender.ui.nodes.recipients.list);
+        var node = $('<div class="fs-badge recipient" />').attr('email', email).appendTo(filesender.ui.nodes.recipients.list);
         $('<span />').attr('title', email).text(email).appendTo(node);
-        $('<span class="remove fa fa-close" />').attr({
+        $('<span class="remove fi fi-close" />').attr({
             title: lang.tr('click_to_delete_recipient')
         }).on('click', function() {
             var email = $(this).parent().attr('email');
@@ -1137,7 +1137,7 @@ filesender.ui.evalUploadEnabled = function() {
 
     if (filesender.ui.stage == 1) {
         configStageOk = configStageOk || filesender.ui.nodes.guest_token.length;
-        filesender.ui.nodes.stages.confirm.prop('disabled', !configStageOk);
+        // filesender.ui.nodes.stages.confirm.prop('disabled', !configStageOk);
         if (configStageOk) {
             filesender.ui.nodes.recipients.input.removeClass('invalid');
         } else {
@@ -2037,7 +2037,7 @@ $(function() {
     form.find('.terms').hide();
 
     // filesender.ui.nodes.stages.nextStep.prop('disabled', true);
-    filesender.ui.nodes.stages.confirm.prop('disabled', true);
+    // filesender.ui.nodes.stages.confirm.prop('disabled', true);
 
     // handle browser back and forward buttons as best as we can
     window.onpopstate = function(event) {
@@ -2066,24 +2066,28 @@ $(function() {
 
     // move to stage2
     filesender.ui.nodes.stages.confirm.on('click',function() {
-        filesender.ui.goToStage(2);
+        if (filesender.ui.evalUploadEnabled()) {
+            filesender.ui.goToStage(2);
 
-        filesender.ui.setFileList(1, 2);
-        filesender.ui.deleteRemoveButton();
+            filesender.ui.setFileList(1, 2);
+            filesender.ui.deleteRemoveButton();
 
-        // best to use a selector because there are dynamic items in list
-        form.find('.progressbar').show();
+            // best to use a selector because there are dynamic items in list
+            form.find('.progressbar').show();
 
-        filesender.ui.switchToUloadingPageConfiguration();
-        filesender.ui.startUpload();
-        filesender.ui.nodes.buttons.start.addClass('not_displayed');
-        if(filesender.supports.reader) {
-            filesender.ui.nodes.buttons.pause.removeClass('not_displayed');
-            filesender.ui.nodes.buttons.reconnect_and_continue.removeClass('not_displayed');
+            filesender.ui.switchToUloadingPageConfiguration();
+            filesender.ui.startUpload();
+            filesender.ui.nodes.buttons.start.addClass('not_displayed');
+            if(filesender.supports.reader) {
+                filesender.ui.nodes.buttons.pause.removeClass('not_displayed');
+                filesender.ui.nodes.buttons.reconnect_and_continue.removeClass('not_displayed');
+            }
+            filesender.ui.nodes.buttons.stop.removeClass('not_displayed');
+
+            window.location.hash = "#uploading";
+        } else {
+            filesender.ui.alert('error', lang.tr('unexpected_file'));
         }
-        filesender.ui.nodes.buttons.stop.removeClass('not_displayed');
-
-        window.location.hash = "#uploading";
 
         return false;
     });
@@ -2385,12 +2389,8 @@ $(function() {
     }
   
     // Custom collapse
-    $('.fs-collapse__open').on('click', function() {
-        $(this.parentElement).addClass('fs-collapse--open');
-    });
-
-    $('.fs-collapse__close').on('click', function() {
-        $(this.parentElement).removeClass('fs-collapse--open');
+    $('.fs-collapse__toggle').on('click', function() {
+        $(this.parentElement).toggleClass('fs-collapse--open');
     });
 
     form.find('.rlangdropitem').on('click', function() {
@@ -2847,7 +2847,7 @@ $(function() {
                 // Following field settings are just cosmetic
                 filesender.ui.nodes.recipients.list.show();
                 for(var i=0; i<failed.recipients.length; i++) {
-                    var node = $('<div class="recipient" />').attr('email', failed.recipients[i]).appendTo(filesender.ui.nodes.recipients.list);
+                    var node = $('<div class="fs-badge recipient" />').attr('email', failed.recipients[i]).appendTo(filesender.ui.nodes.recipients.list);
                     $('<span />').attr('title', failed.recipients[i]).text(failed.recipients[i]).appendTo(node);
                 }
 

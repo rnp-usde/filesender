@@ -5,7 +5,7 @@
 }
 
 .fs-transfer .col-12 {
-  padding: 0 var(--fs-spacing-3x);
+  padding: 0 var(--fs-spacing-2x);
 }
 
 .fs-transfer__step {
@@ -29,20 +29,30 @@
 .fs-transfer__droparea {
   position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 35vh;
+  min-height: 348px;
   padding: var(--fs-spacing-5x);
   margin-top: var(--fs-spacing-4x);
   border: 1px dashed var(--fs-dark-border-color);
   border-radius: var(--fs-spacing-base);
   font-size: 1.6rem;
   font-weight: bold;
+  background: var(--fs-transfer-droparea-background);
 }
 
 .fs-transfer__droparea--hide {
   display: none;
+}
+
+.fs-transfer__select-text {
+  display: flex;
+  flex-direction: row;
+}
+
+.fs-transfer__drop-text {
+  display: block;
 }
 
 .fs-transfer__droparea input {
@@ -351,11 +361,22 @@
 }
 
 .fs-transfer__recipients {
-  /*padding-left: var(--fs-spacing-22x);*/
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
-.fs-transfer__recipients .remove {
-  color: var(--fs-error);
+.fs-transfer__recipients .fs-badge {
+  margin-top: var(--fs-spacing-2x);
+  margin-bottom: 0 !important;
+}
+
+.fs-transfer__recipients .fs-badge {
+  color: var(--fs-text-color);
+}
+
+.fs-transfer__recipients .fs-badge .fa {
+  color: var(--fs-accent);
 }
 
 .fs-transfer__generate-password {
