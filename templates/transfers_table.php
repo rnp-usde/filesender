@@ -118,11 +118,12 @@
     $showPager = $havePrev || $haveNext;
 
 if(!function_exists("makeAction")) {
-    function makeAction( $da, $ex, $title, $faicon )
+    function makeAction( $da, $ex, $title, $icon )
     {
         echo <<<EOF
-               <button data-action="$da" type="button" class="fs-button fs-button--circle fs-button--no-text $ex" title="$title">
-                  <i class="fa $faicon" ></i>
+               <button data-action="$da" type="button" class="fs-button $ex" title="$title">
+                  <i class="fi $icon" ></i>
+                  <span>$title</span>
                </button>
 EOF;
     }
@@ -133,13 +134,30 @@ EOF;
 <table class="fs-table fs-table--responsive fs-table--selectable fs-table--striped" data-status="<?php echo $status ?>" data-mode="<?php echo $mode ?>" data-audit="<?php echo $audit ?>">
     <thead>
     <tr>
-        <th>
-            <?php clickableHeader('{tr:transfer_id_short}',TransferQueryOrder::COLUMN_ID,$trsort,$nosort,'{tr:transfer_id}'); ?>
-        </th>
 
         <?php if($show_guest) { ?>
             <th>
-                {tr:guest}
+                {tr:from}
+            </th>
+        <?php } ?>
+
+        <?php if(!$show_guest) { ?>
+            <th>
+                {tr:transfer_name}
+            </th>
+        <?php } ?>
+
+        <th>
+            Date
+        </th>
+
+        <th>
+            <?php clickableHeader('{tr:files}',TransferQueryOrder::COLUMN_FILE,$trsort,$nosort); ?>
+        </th>
+
+        <?php if(!$show_guest) { ?>
+            <th>
+                <?php clickableHeader('{tr:downloads}',TransferQueryOrder::COLUMN_DOWNLOAD,$trsort,$nosort); ?>
             </th>
         <?php } ?>
 
@@ -147,25 +165,11 @@ EOF;
             <?php clickableHeader('{tr:recipients}',TransferQueryOrder::COLUMN_RECIPIENTS,$trsort,$nosort); ?>
         </th>
 
-        <th>
-            <?php clickableHeader('{tr:size}',TransferQueryOrder::COLUMN_SIZE,$trsort,$nosort); ?>
-        </th>
-
-        <th>
-            <?php clickableHeader('{tr:files}',TransferQueryOrder::COLUMN_FILE,$trsort,$nosort); ?>
-        </th>
-
-        <th>
-            <?php clickableHeader('{tr:downloads}',TransferQueryOrder::COLUMN_DOWNLOAD,$trsort,$nosort); ?>
-        </th>
-
-        <th>
-            <?php clickableHeader('{tr:expires}',TransferQueryOrder::COLUMN_EXPIRES,$trsort,$nosort); ?>
-        </th>
-
-       <th class="actions">
-           {tr:actions}
-       </th>
+        <?php if(!$show_guest) { ?>
+           <th class="actions">
+               {tr:actions}
+           </th>
+        <?php } ?>
     </tr>
     </thead>
     <tbody>
@@ -202,6 +206,38 @@ EOF;
                 </td>
             <?php } ?>
 
+            <?php if(!$show_guest) { ?>
+                <td class="fs-table__name">
+                    <?php
+                        if (property_exists($transfer, 'name')) {
+                            echo $transfer->name;
+                        } else {
+                            echo '-';
+                        }
+                    ?>
+                </td>
+            <?php } ?>
+
+            <td>
+                <?php echo Utilities::formatDate($transfer->created) ?>
+            </td>
+
+            <td data-label="{tr:files}">
+                <?php
+                $items = GUI::getFileNamesForDisplay( $transfer, true );
+                echo implode('<br />', $items);
+                ?>
+            </td>
+
+            <?php if(!$show_guest) { ?>
+                <td data-label="{tr:downloads}">
+                    <?php
+                        $dc = count($transfer->downloads);
+                        echo $dc;
+                    ?>
+                </td>
+            <?php } ?>
+
             <td data-label="{tr:recipients}">
                 <?php
                 $items = array();
@@ -211,7 +247,7 @@ EOF;
                     } else if($recipient->email) {
                         $items[] = '<a href="mailto:'.Template::sanitizeOutputEmail($recipient->email).'">'.Template::replaceTainted($recipient->identity).'</a>';
                     } else {
-                        $items[] = '<abbr title="'.Lang::tr('anonymous_details').'">'.Lang::tr('anonymous').'</abbr>';
+                        $items[] = Lang::tr('download_link');
                     }
                 }
 
@@ -222,62 +258,17 @@ EOF;
                 ?>
             </td>
 
-            <td data-label="{tr:size}">
-                <?php echo Utilities::formatBytes($transfer->size) ?>
-            </td>
+            <?php if(!$show_guest) { ?>
+                <td class="actions fs-table__actions">
+                    <?php
+                    if( $status == 'available' ) {
+                        makeAction("remind", "", "{tr:send_reminder}", "fi-reminder" );
+                    }
 
-            <td data-label="{tr:files}">
-                <?php
-                $items = GUI::getFileNamesForDisplay( $transfer, true );
-                echo implode('<br />', $items);
-                ?>
-            </td>
-
-            <td data-label="{tr:downloads}">
-                <?php
-                    $dc = count($transfer->downloads);
-                    echo $dc;
-                ?>
-            </td>
-
-            <td data-label="{tr:expires}">
-                <?php echo Utilities::formatDate($transfer->expires) ?>
-            </td>
-
-            
-            <td class="actions  fs-table__actions">
-                <?php
-                if( $status != 'available' ) {
-                    echo ' <div id="marg3" class="actionsblock"> ';
-                    makeAction("details", "", "{tr:details}", "fa-info" );
-                    if($audit) { makeAction("auditlog", "", "{tr:open_auditlog}", "fa-history" ); }
-                    echo '</div> ';
-                } else {
-                ?>
-                
-                    <div id="marg3" class="actionsblock">
-                        <?php
-                        
-                        makeAction("delete", "fs-button--danger delete", "{tr:delete_transfer}", "fa-trash" );
-                        if($extend) { makeAction("extend", "", "", "fa-calendar-plus-o" ); }  
-                        makeAction("add_recipient", "", "{tr:add_recipient}", "fa-envelope-o" );
-                        makeAction("details", "", "{tr:details}", "fa-info" );
-                        
-                        ?>
-                    </div>
-                    <div id="marg3.2"  class="actionsblock">
-                        <?php
-                        
-                        makeAction("remind", "", "{tr:send_reminder}", "fa-repeat" );
-                        if($audit) { makeAction("auditlog", "", "{tr:open_auditlog}", "fa-history" ); }
-                        if($showAdminExtend) { makeAction("extendexpires", "", "{tr:extend_expires}", "fa-clock-o" ); }
-                        
-                        ?>
-                    </div>
-                    
-                <?php } ?>
-            </td>
-            
+                    makeAction("delete", "delete", "{tr:delete_transfer}", "fi-trash" );
+                    ?>
+                </td>
+            <?php } ?>
         </tr>
     <?php } ?>
 
@@ -307,13 +298,13 @@ EOF;
             echo "<a class='fs-link fs-link--circle' href='$base&cgioffset=$prevPage&cgilimit=$cgilimit&transfersort=$transfersort&as=$as'><i class='fa fa-angle-left'></i></a>";
         } else {
             echo "<a class='fs-link fs-link--circle fs-link--disabled' href='javascript:void(0)'><i class='fa fa-angle-double-left'></i></a>";
-            echo "<a class='fs-link fs-link--circle fs-link--disabled' href='javascript:void(0)'><i class='fa fa-angle-left'></i></a>";
+            echo "<a class='fs-link fs-link--circle fs-link--disabled' href='javascript:void(0)'><i class='fi fi-chevron-left'></i></a>";
         }
 
         if( $haveNext ) {
-            echo "<a class='fs-link fs-link--circle' href='$nextLink'><i class='fa fa-angle-right'></i></a>";
+            echo "<a class='fs-link fs-link--circle' href='$nextLink'><i class='fi fi-chevron-right'></i></a>";
         } else {
-            echo "<a class='fs-link fs-link--circle fs-link--disabled' href='javascript:void(0)'><i class='fa fa-angle-right'></i></a>";
+            echo "<a class='fs-link fs-link--circle fs-link--disabled' href='javascript:void(0)'><i class='fi fi-chevron-right'></i></a>";
         }
 
         echo "</div>";

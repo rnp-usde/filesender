@@ -47,6 +47,68 @@ $(function() {
     filesender.client.bindDownloadArchive();
     filesender.client.bindFileCheckButtons();
 
+    var button_zipdl = page.find('.archive_download_frame');
+    var button_tardl = page.find('.archive_tar_download_frame');
+    if( macos || linuxos ) {
+        button_tardl.addClass('fs-button');
+    } else {
+        button_zipdl.addClass('fs-button');
+    }
+
+    if( window.filesender.config.download_verification_code_enabled ) {
+        var transferid = $('.transfer').attr('data-id');
+        var rid = $('.rid').attr('data-id');
+
+        page.find('.verificationcodesendtoemail').button().on('click', function () {
+            filesender.client.sendVerificationCodeToYourEmailAddress(
+                transferid,
+                function () {
+                    window.filesender.ui.notify("info", lang.tr("email_sent"));
+                });
+            return true;
+        });
+        page.find('.verificationcodesend').button().on('click', function () {
+            var pass = $('#verificationcode').val();
+            if (!pass.length) {
+                // nothing, could have just returned true here.
+            } else {
+                try {
+                    var options = {
+                        error: function (e) {
+                            if (e.message == 'rest_data_stale') {
+                                window.filesender.ui.alert("error", lang.tr("verification_code_is_too_old"));
+                                return;
+                            }
+                            filesender.ui.error(e);
+                        }
+                    };
+
+
+                    filesender.client.checkVerificationCodeWithServer(
+                        transferid, pass,
+                        function (args) {
+                            if (args.ok === true) {
+                                verificationCodePassed = true;
+                                $(".verify_email_to_download").dialog("close");
+
+                                var encrypted = verificationCodeObjectThatTiggeredEvent.closest('.file').attr('data-encrypted');
+                                var msg = "downloading";
+                                if (!encrypted) {
+                                    window.filesender.ui.notify("info", lang.tr(msg));
+                                }
+                                verificationCodeObjectThatTiggeredEvent.click();
+                            } else {
+                                window.filesender.ui.alert("error", lang.tr("verification_code_did_not_match"));
+                            }
+                        }
+                        , options
+                    );
+                } catch (exception) {
+                }
+            }
+            return true;
+        });
+    }
+
     $('#check-all').click();
-    
 });
